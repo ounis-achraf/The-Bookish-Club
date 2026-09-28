@@ -292,33 +292,30 @@ export default function Dashboard() {
             {/* Filter chips with Western numerals */}
             <div className="flex items-center gap-space-sm overflow-x-auto pb-1">
               <button
-                className={`px-3 py-1.5 rounded-full font-label-md text-label-md shrink-0 shadow-sm transition-all active:scale-95 cursor-pointer ${
-                  filter === "all"
+                className={`px-3 py-1.5 rounded-full font-label-md text-label-md shrink-0 shadow-sm transition-all active:scale-95 cursor-pointer ${filter === "all"
                     ? "bg-primary text-on-primary font-medium"
                     : "bg-surface-container-lowest text-on-surface-variant font-medium hover:bg-surface-container border border-outline-variant/30"
-                }`}
+                  }`}
                 onClick={() => setFilter("all")}
                 type="button"
               >
                 الأحدث
               </button>
               <button
-                className={`px-3 py-1.5 rounded-full font-label-md text-label-md shrink-0 shadow-sm transition-all active:scale-95 cursor-pointer ${
-                  filter === "high"
+                className={`px-3 py-1.5 rounded-full font-label-md text-label-md shrink-0 shadow-sm transition-all active:scale-95 cursor-pointer ${filter === "high"
                     ? "bg-primary text-on-primary font-medium"
                     : "bg-surface-container-lowest text-on-surface-variant font-medium hover:bg-surface-container border border-outline-variant/30"
-                }`}
+                  }`}
                 onClick={() => setFilter("high")}
                 type="button"
               >
                 الأعلى تقييماً (4+)
               </button>
               <button
-                className={`px-3 py-1.5 rounded-full font-label-md text-label-md shrink-0 shadow-sm transition-all active:scale-95 cursor-pointer ${
-                  filter === "photos"
+                className={`px-3 py-1.5 rounded-full font-label-md text-label-md shrink-0 shadow-sm transition-all active:scale-95 cursor-pointer ${filter === "photos"
                     ? "bg-primary text-on-primary font-medium"
                     : "bg-surface-container-lowest text-on-surface-variant font-medium hover:bg-surface-container border border-outline-variant/30"
-                }`}
+                  }`}
                 onClick={() => setFilter("photos")}
                 type="button"
               >
@@ -358,11 +355,11 @@ export default function Dashboard() {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2 shrink-0">
-                      <div className="flex items-center gap-0.5 text-tertiary-fixed-dim shrink-0">
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <div className="inline-flex items-center gap-[1px] px-1.5 py-0.5 rounded-full bg-surface-container-high/70 text-tertiary-fixed-dim shrink-0">
                         {[1, 2, 3, 4, 5].map((n) => (
                           <span
-                            className="material-symbols-outlined text-[11px]"
+                            className="material-symbols-outlined text-[9px]"
                             key={n}
                             style={{ fontVariationSettings: `'FILL' ${n <= r.rating ? 1 : 0}` }}
                           >
@@ -372,12 +369,12 @@ export default function Dashboard() {
                       </div>
                       <button
                         aria-label="حذف المراجعة"
-                        className="text-error hover:bg-error-container/40 p-1.5 rounded-lg transition-colors cursor-pointer shrink-0"
+                        className="text-error hover:bg-error-container/40 p-1 rounded-lg transition-colors cursor-pointer shrink-0"
                         onClick={() => remove(r.id)}
                         title="حذف"
                         type="button"
                       >
-                        <span className="material-symbols-outlined text-[18px]">delete</span>
+                        <span className="material-symbols-outlined text-[16px]">delete</span>
                       </button>
                     </div>
                   </div>

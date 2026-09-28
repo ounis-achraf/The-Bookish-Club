@@ -85,13 +85,12 @@ export default function Archive() {
 
   function StarRow({ rating }: { rating: number }) {
     return (
-      <span className="flex gap-0.5 shrink-0" aria-label={`تقييم ${rating} من 5`}>
+      <span className="inline-flex items-center gap-[1px] px-1.5 py-0.5 rounded-full bg-surface-container-high/70 shrink-0" aria-label={`تقييم ${rating} من 5`}>
         {[1, 2, 3, 4, 5].map((s) => (
           <span
             key={s}
-            className={`material-symbols-outlined text-[11px] ${
-              s <= rating ? "text-tertiary" : "text-outline/30"
-            }`}
+            className={`material-symbols-outlined text-[9px] ${s <= rating ? "text-tertiary" : "text-outline/30"
+              }`}
             style={{ fontVariationSettings: "'FILL' 1" }}
           >
             star
@@ -167,11 +166,10 @@ export default function Archive() {
                     key={b.id}
                     type="button"
                     onClick={() => openBook(b)}
-                    className={`w-full text-right bg-surface-container-lowest rounded-2xl p-space-md shadow-sm border transition-all duration-200 flex gap-space-md items-center cursor-pointer active:scale-[0.99] ${
-                      isActive
+                    className={`w-full text-right bg-surface-container-lowest rounded-2xl p-space-md shadow-sm border transition-all duration-200 flex gap-space-md items-center cursor-pointer active:scale-[0.99] ${isActive
                         ? "border-primary/40 shadow-md ring-1 ring-primary/20"
                         : "border-surface-container-high hover:border-primary/20 hover:shadow-md"
-                    }`}
+                      }`}
                   >
                     {/* Cover */}
                     <div className="w-16 h-24 rounded-lg overflow-hidden shrink-0 bg-surface-container flex items-center justify-center shadow-sm">
@@ -200,9 +198,8 @@ export default function Archive() {
                           <span>{reviewCount} مراجعة</span>
                         </span>
                         <span
-                          className={`material-symbols-outlined text-[20px] transition-transform duration-300 ${
-                            isActive ? "rotate-180 text-primary" : "text-outline/50"
-                          }`}
+                          className={`material-symbols-outlined text-[20px] transition-transform duration-300 ${isActive ? "rotate-180 text-primary" : "text-outline/50"
+                            }`}
                         >
                           expand_more
                         </span>
@@ -218,11 +215,10 @@ export default function Archive() {
 
       {/* Drawer Overlay */}
       <div
-        className={`fixed inset-0 z-40 transition-all duration-300 ${
-          drawerOpen
+        className={`fixed inset-0 z-40 transition-all duration-300 ${drawerOpen
             ? "bg-black/40 backdrop-blur-sm pointer-events-auto"
             : "bg-transparent pointer-events-none"
-        }`}
+          }`}
         onClick={closeDrawer}
       />
 
