@@ -98,26 +98,19 @@ export default function Dashboard() {
 
   return (
     <>
-      {/* Top Header */}
+      {/* Top Header (Book icon removed, text centered in middle) */}
       <header className="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_12px_rgba(65,40,23,0.06)] pt-safe">
-        <div className="h-16 px-margin flex items-center justify-between">
-          <div className="flex items-center gap-space-sm">
-            <div className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center p-1.5 shadow-sm">
-              <span className="material-symbols-outlined text-primary text-[18px]">
-                auto_stories
-              </span>
-            </div>
-            <div className="flex flex-col">
-              <span
-                className="text-label-sm text-secondary leading-tight font-semibold font-ballet"
-                style={{ fontFamily: "Ballet, serif" }}
-              >
-                The Bookish Club
-              </span>
-              <h1 className="font-title-md text-title-md text-primary leading-tight tracking-tight font-bold font-thmanyah">
-                لوحة التحكم
-              </h1>
-            </div>
+        <div className="h-16 px-margin flex items-center justify-center text-center max-w-2xl mx-auto">
+          <div className="flex flex-col items-center justify-center text-center">
+            <span
+              className="text-label-sm text-secondary leading-tight font-semibold font-ballet"
+              style={{ fontFamily: "Ballet, serif" }}
+            >
+              The Bookish Club
+            </span>
+            <h1 className="font-title-md text-title-md text-primary leading-tight tracking-tight font-bold font-thmanyah">
+              لوحة التحكم
+            </h1>
           </div>
         </div>
       </header>

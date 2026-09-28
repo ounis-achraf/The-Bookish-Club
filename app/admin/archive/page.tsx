@@ -45,27 +45,20 @@ export default function Archive() {
 
   return (
     <>
-      {/* Top Header */}
+      {/* Top Header (Icon removed, text centered in middle) */}
       <header className="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_12px_rgba(65,40,23,0.06)] pt-safe">
-        <div className="h-16 px-margin flex items-center justify-between">
-          <div className="flex items-center gap-space-sm">
-            <button
-              aria-label="الرجوع للخلف"
-              className="w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary transition-colors cursor-pointer"
-              onClick={() => router.push("/admin/dashboard")}
-              type="button"
-            >
-              <span className="material-symbols-outlined text-[24px]">arrow_forward</span>
-            </button>
-            <div className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center p-1.5 shadow-sm">
-              <span className="material-symbols-outlined text-primary text-[18px]">
-                collections_bookmark
-              </span>
-            </div>
-            <h1 className="font-title-md text-title-md text-primary leading-tight font-semibold font-thmanyah">
-              أرشيف الكتب السابقة
-            </h1>
-          </div>
+        <div className="h-16 px-margin flex items-center justify-center relative max-w-2xl mx-auto">
+          <button
+            aria-label="الرجوع للخلف"
+            className="absolute right-4 w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary transition-colors cursor-pointer"
+            onClick={() => router.push("/admin/dashboard")}
+            type="button"
+          >
+            <span className="material-symbols-outlined text-[24px]">arrow_forward</span>
+          </button>
+          <h1 className="font-title-md text-title-md text-primary leading-tight font-semibold font-thmanyah text-center">
+            أرشيف الكتب السابقة
+          </h1>
         </div>
       </header>
 

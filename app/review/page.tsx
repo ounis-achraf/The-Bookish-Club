@@ -123,25 +123,20 @@ export default function ReviewPage() {
 
   return (
     <>
-      {/* Fixed Top Header (Cosmetic profile icon removed from upper-left) */}
+      {/* Fixed Top Header (No book icon, text centered in the middle) */}
       <header className="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_12px_rgba(65,40,23,0.06)] pt-safe">
-        <div className="h-16 px-margin flex items-center justify-between">
-          <div className="flex items-center gap-space-sm">
-            <button
-              aria-label="الرجوع للخلف"
-              className="w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary transition-colors cursor-pointer"
-              onClick={() => history.back()}
-              type="button"
-            >
-              <span className="material-symbols-outlined text-[24px]">arrow_forward</span>
-            </button>
-            <div className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center p-1.5 shadow-sm">
-              <span className="material-symbols-outlined text-primary text-[18px]">auto_stories</span>
-            </div>
-            <h1 className="text-headline-sm text-primary leading-tight font-semibold font-ballet" style={{ fontFamily: "Ballet, serif" }}>
-              The Bookish Club
-            </h1>
-          </div>
+        <div className="h-16 px-margin flex items-center justify-center relative max-w-xl mx-auto">
+          <button
+            aria-label="الرجوع للخلف"
+            className="absolute right-4 w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary transition-colors cursor-pointer"
+            onClick={() => history.back()}
+            type="button"
+          >
+            <span className="material-symbols-outlined text-[24px]">arrow_forward</span>
+          </button>
+          <h1 className="text-headline-sm text-primary leading-tight font-semibold font-ballet text-center" style={{ fontFamily: "Ballet, serif" }}>
+            The Bookish Club
+          </h1>
         </div>
       </header>
 
@@ -200,7 +195,7 @@ export default function ReviewPage() {
           </section>
 
           {done ? (
-            /* Confirmation Success Card (Non-functional buttons removed) */
+            /* Confirmation Success Card */
             <div
               className="w-full bg-surface-container-lowest rounded-xl p-space-xl text-center shadow-lg flex flex-col items-center justify-center my-4 border border-surface-container-high"
               id="success-confirmation"
@@ -271,8 +266,9 @@ export default function ReviewPage() {
                       {[1, 2, 3, 4, 5].map((n) => (
                         <button
                           aria-label={`${n} نجوم`}
-                          className={`star-btn transition-transform active:scale-90 p-1 ${n <= rating ? "text-[#C08A3E]" : "text-on-surface-variant/40"
-                            }`}
+                          className={`star-btn transition-transform active:scale-90 p-1 ${
+                            n <= rating ? "text-[#C08A3E]" : "text-on-surface-variant/40"
+                          }`}
                           key={n}
                           onClick={() => setRating(n)}
                           type="button"
