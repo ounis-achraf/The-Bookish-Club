@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { createClient } from "../../../lib/supabase";
 import { useRouter } from "next/navigation";
-import AdminNavbar from "../../components/AdminNavbar";
 
 interface Book {
   id: string;
@@ -359,7 +358,32 @@ export default function Archive() {
         </div>
       </div>
 
-      <AdminNavbar activeTab="archive" />
+      {/* Fixed Bottom Navigation Bar */}
+      <nav className="fixed bottom-0 w-full z-30 pb-safe bg-surface-container-low/90 backdrop-blur-xl shadow-[0_-4px_16px_rgba(65,40,23,0.06)] border-t border-outline-variant/30 font-thmanyah">
+        <div className="flex justify-around items-center h-16 max-w-md mx-auto px-space-xs">
+          <a
+            className="flex flex-col items-center justify-center gap-1 w-16 h-12 text-on-surface-variant hover:text-primary transition-colors"
+            href="/admin/dashboard"
+          >
+            <span className="material-symbols-outlined text-[22px]">dashboard</span>
+            <span className="font-label-sm text-label-sm">الرئيسية</span>
+          </a>
+          <a
+            className="flex flex-col items-center justify-center gap-1 w-16 h-12 text-on-surface-variant hover:text-primary transition-colors"
+            href="/admin/book"
+          >
+            <span className="material-symbols-outlined text-[22px]">auto_stories</span>
+            <span className="font-label-sm text-label-sm">كتاب الشهر</span>
+          </a>
+          <a
+            className="flex flex-col items-center justify-center gap-1 w-16 h-12 text-primary font-semibold"
+            href="/admin/archive"
+          >
+            <span className="material-symbols-outlined text-[22px]">collections_bookmark</span>
+            <span className="font-label-sm text-label-sm">الأرشيف</span>
+          </a>
+        </div>
+      </nav>
     </>
   );
 }
