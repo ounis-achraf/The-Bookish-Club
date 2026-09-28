@@ -6,11 +6,11 @@ import { createClient } from "../../lib/supabase";
 type Book = { id: string; title: string; author: string; cover_url: string | null };
 
 const RATING_TEXTS: Record<number, string> = {
-  1: "انقر للتقييم: غير مُرضٍ (١ من ٥)",
-  2: "انقر للتقييم: مقبول (٢ من ٥)",
-  3: "انقر للتقييم: جيد (٣ من ٥)",
-  4: "انقر للتقييم: رائع جداً (٤ من ٥)",
-  5: "انقر للتقييم: ممتاز (٥ من ٥)"
+  1: "انقر للتقييم: غير مُرضٍ (1 من 5)",
+  2: "انقر للتقييم: مقبول (2 من 5)",
+  3: "انقر للتقييم: جيد (3 من 5)",
+  4: "انقر للتقييم: رائع جداً (4 من 5)",
+  5: "انقر للتقييم: ممتاز (5 من 5)"
 };
 
 export default function ReviewPage() {
@@ -94,15 +94,6 @@ export default function ReviewPage() {
     }
   }
 
-  const resetForm = () => {
-    setName("");
-    setRating(5);
-    setText("");
-    removePhoto();
-    setError("");
-    setDone(false);
-  };
-
   if (loading) {
     return (
       <main className="flex-1 flex flex-col justify-center items-center min-h-screen bg-surface px-margin">
@@ -110,7 +101,7 @@ export default function ReviewPage() {
           <span className="material-symbols-outlined text-secondary text-[36px] animate-spin">
             auto_stories
           </span>
-          <p className="font-body-md text-on-surface-variant">جارٍ تحميل كتاب هذا الشهر...</p>
+          <p className="font-body-md text-on-surface-variant font-thmanyah">جارٍ تحميل كتاب هذا الشهر...</p>
         </div>
       </main>
     );
@@ -123,8 +114,8 @@ export default function ReviewPage() {
           <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-secondary mx-auto mb-4">
             <span className="material-symbols-outlined text-[32px]">menu_book</span>
           </div>
-          <h1 className="font-headline-md text-primary font-semibold mb-2">لا يوجد كتاب حالي</h1>
-          <p className="font-body-md text-on-surface-variant">النادي في فترة استراحة بين الكتب حالياً.</p>
+          <h1 className="font-headline-md text-primary font-semibold mb-2 font-thmanyah">لا يوجد كتاب حالي</h1>
+          <p className="font-body-md text-on-surface-variant font-thmanyah">النادي في فترة استراحة بين الكتب حالياً.</p>
         </div>
       </main>
     );
@@ -132,13 +123,13 @@ export default function ReviewPage() {
 
   return (
     <>
-      {/* Fixed Top Header */}
+      {/* Fixed Top Header (Cosmetic profile icon removed from upper-left) */}
       <header className="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_12px_rgba(65,40,23,0.06)] pt-safe">
         <div className="h-16 px-margin flex items-center justify-between">
           <div className="flex items-center gap-space-sm">
             <button
               aria-label="الرجوع للخلف"
-              className="w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary transition-colors"
+              className="w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary transition-colors cursor-pointer"
               onClick={() => history.back()}
               type="button"
             >
@@ -147,18 +138,15 @@ export default function ReviewPage() {
             <div className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center p-1.5 shadow-sm">
               <span className="material-symbols-outlined text-primary text-[18px]">auto_stories</span>
             </div>
-            <h1 className="font-title-md text-title-md text-primary leading-tight font-semibold">
+            <h1 className="text-headline-sm text-primary leading-tight font-semibold font-ballet" style={{ fontFamily: "Ballet, serif" }}>
               The Bookish Club
             </h1>
-          </div>
-          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
-            <span className="material-symbols-outlined text-on-primary text-[18px]">person</span>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col relative w-full pt-20 pb-safe bg-surface px-margin max-w-xl mx-auto">
+      <main className="flex-1 flex flex-col relative w-full pt-20 pb-safe bg-surface px-margin max-w-xl mx-auto font-thmanyah">
         <div className="flex flex-col w-full pb-10">
           {/* Literary Brand Header */}
           <section className="flex flex-col items-center justify-center text-center py-4 px-margin mb-2">
@@ -166,18 +154,18 @@ export default function ReviewPage() {
               <span className="material-symbols-outlined text-primary text-[32px]">menu_book</span>
             </div>
             <span
-              className="font-headline-lg text-headline-lg text-primary tracking-wide mb-0.5"
-              style={{ fontFamily: "Noto Serif, serif" }}
+              className="text-display-lg text-primary tracking-wide mb-0.5 font-ballet"
+              style={{ fontFamily: "Ballet, serif" }}
             >
               The Bookish Club
             </span>
-            <p className="font-label-md text-label-md text-secondary tracking-widest">
+            <p className="font-label-md text-label-md text-secondary tracking-widest font-thmanyah">
               نادي الكتّاب • جلسات القراءة الحوارية
             </p>
           </section>
 
           {/* Current Book Spotlight Card */}
-          <section className="w-full bg-surface-container-lowest rounded-xl p-space-md mb-space-lg shadow-sm">
+          <section className="w-full bg-surface-container-lowest rounded-xl p-space-md mb-space-lg shadow-sm border border-surface-container-high">
             <div className="flex items-start gap-space-md">
               <div className="relative w-20 h-28 rounded-lg overflow-hidden shrink-0 shadow-md bg-surface-variant flex items-center justify-center">
                 {book.cover_url ? (
@@ -215,9 +203,9 @@ export default function ReviewPage() {
           </section>
 
           {done ? (
-            /* Confirmation Success Card */
+            /* Confirmation Success Card (Non-functional buttons removed) */
             <div
-              className="w-full bg-surface-container-lowest rounded-xl p-space-xl text-center shadow-lg flex flex-col items-center justify-center my-4"
+              className="w-full bg-surface-container-lowest rounded-xl p-space-xl text-center shadow-lg flex flex-col items-center justify-center my-4 border border-surface-container-high"
               id="success-confirmation"
             >
               <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-secondary mb-space-md animate-bounce">
@@ -228,41 +216,25 @@ export default function ReviewPage() {
                   check_circle
                 </span>
               </div>
-              <h3 className="font-headline-md text-headline-md text-primary mb-space-xs font-bold">
+              <h3 className="font-headline-md text-headline-md text-primary mb-space-xs font-bold font-thmanyah">
                 شكراً لمشاركتك القيّمة!
               </h3>
-              <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed max-w-xs mb-space-lg">
+              <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed max-w-xs font-thmanyah">
                 تم استلام مراجعتك حول كتاب <strong>"{book.title}"</strong> بنجاح. ستُدرج ضمن محاور
                 نقاشنا الأدبي في جلسة النادي القادمة وتظهر على لوحة الأعضاء.
               </p>
-              <div className="w-full flex flex-col gap-space-sm">
-                <button
-                  className="w-full h-12 bg-primary-container text-on-primary font-title-md text-title-md font-semibold rounded-xl shadow-sm active:bg-primary transition-all hover:bg-primary"
-                  onClick={resetForm}
-                  type="button"
-                >
-                  إرسال مراجعة أخرى
-                </button>
-                <button
-                  className="w-full h-11 bg-surface-container text-primary font-label-lg text-label-lg rounded-xl active:bg-surface-variant transition-all font-medium"
-                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                  type="button"
-                >
-                  العودة لأعلى الصفحة
-                </button>
-              </div>
             </div>
           ) : (
             /* Interactive Review Form Container */
             <div
-              className="w-full bg-surface-container-lowest rounded-xl p-space-md sm:p-space-lg shadow-sm"
+              className="w-full bg-surface-container-lowest rounded-xl p-space-md sm:p-space-lg shadow-sm border border-surface-container-high"
               id="review-form-container"
             >
               <div className="mb-space-lg">
-                <h3 className="font-headline-md text-headline-md text-primary mb-1 font-bold">
+                <h3 className="font-headline-md text-headline-md text-primary mb-1 font-bold font-thmanyah">
                   شاركنا رأيك
                 </h3>
-                <p className="font-body-sm text-body-sm text-on-surface-variant">
+                <p className="font-body-sm text-body-sm text-on-surface-variant font-thmanyah">
                   رأيك القيّم يثري حوارنا القادم في الجلسة الأدبية الشهرية
                 </p>
               </div>
@@ -364,7 +336,6 @@ export default function ReviewPage() {
                   </span>
 
                   {photoPreview ? (
-                    /* Attached Photo Preview Card */
                     <div className="relative bg-surface-container-low rounded-xl p-space-sm flex items-center justify-between gap-space-md">
                       <div className="flex items-center gap-space-md min-w-0">
                         <div className="w-14 h-14 rounded-lg overflow-hidden shrink-0 shadow-sm bg-surface-container">
@@ -385,7 +356,7 @@ export default function ReviewPage() {
                       </div>
                       <button
                         aria-label="حذف الصورة"
-                        className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-error transition-colors shrink-0"
+                        className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-error transition-colors shrink-0 cursor-pointer"
                         onClick={removePhoto}
                         type="button"
                       >
@@ -393,7 +364,6 @@ export default function ReviewPage() {
                       </button>
                     </div>
                   ) : (
-                    /* Upload Button Box */
                     <label className="w-full bg-surface-container-low rounded-xl p-space-md text-center flex flex-col items-center justify-center gap-space-xs cursor-pointer hover:bg-surface-container transition-colors border border-dashed border-outline-variant">
                       <input
                         accept="image/jpeg,image/png,image/webp"

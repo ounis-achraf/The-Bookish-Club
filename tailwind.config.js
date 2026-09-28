@@ -75,17 +75,19 @@ module.exports = {
         "space-lg": "1.5rem"
       },
       fontFamily: {
-        "body-lg": ["IBM Plex Sans Arabic", "IBM Plex Sans", "sans-serif"],
-        "headline-md": ["Noto Serif", "serif"],
-        "title-md": ["IBM Plex Sans Arabic", "IBM Plex Sans", "sans-serif"],
-        "body-md": ["IBM Plex Sans Arabic", "IBM Plex Sans", "sans-serif"],
-        "headline-lg": ["Noto Serif", "serif"],
-        "label-md": ["IBM Plex Sans Arabic", "IBM Plex Sans", "sans-serif"],
-        "label-lg": ["IBM Plex Sans Arabic", "IBM Plex Sans", "sans-serif"],
-        "label-sm": ["IBM Plex Sans Arabic", "IBM Plex Sans", "sans-serif"],
-        "display-lg": ["Noto Serif", "serif"],
-        "body-sm": ["IBM Plex Sans Arabic", "IBM Plex Sans", "sans-serif"],
-        "headline-sm": ["Noto Serif", "serif"]
+        "body-lg": ["Thmanyah", "IBM Plex Sans Arabic", "sans-serif"],
+        "headline-md": ["Thmanyah", "Noto Serif", "serif"],
+        "title-md": ["Thmanyah", "IBM Plex Sans Arabic", "sans-serif"],
+        "body-md": ["Thmanyah", "IBM Plex Sans Arabic", "sans-serif"],
+        "headline-lg": ["Thmanyah", "Noto Serif", "serif"],
+        "label-md": ["Thmanyah", "IBM Plex Sans Arabic", "sans-serif"],
+        "label-lg": ["Thmanyah", "IBM Plex Sans Arabic", "sans-serif"],
+        "label-sm": ["Thmanyah", "IBM Plex Sans Arabic", "sans-serif"],
+        "display-lg": ["Ballet", "Noto Serif", "serif"],
+        "body-sm": ["Thmanyah", "IBM Plex Sans Arabic", "sans-serif"],
+        "headline-sm": ["Thmanyah", "Noto Serif", "serif"],
+        "thmanyah": ["Thmanyah", "sans-serif"],
+        "ballet": ["Ballet", "serif"]
       },
       fontSize: {
         "body-lg": ["17px", { lineHeight: "28px", letterSpacing: "0", fontWeight: "400" }],

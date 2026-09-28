@@ -99,7 +99,7 @@ export default function BookManager() {
           <span className="material-symbols-outlined text-secondary text-[36px] animate-spin">
             auto_stories
           </span>
-          <p className="font-body-md text-on-surface-variant">جارٍ التحميل...</p>
+          <p className="font-body-md text-on-surface-variant font-thmanyah">جارٍ التحميل...</p>
         </div>
       </main>
     );
@@ -126,18 +126,15 @@ export default function BookManager() {
                 auto_stories
               </span>
             </div>
-            <h1 className="font-title-md text-title-md text-primary leading-tight font-semibold">
+            <h1 className="font-title-md text-title-md text-primary leading-tight font-semibold font-thmanyah">
               تغيير كتاب الشهر
             </h1>
-          </div>
-          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
-            <span className="material-symbols-outlined text-on-primary text-[18px]">person</span>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col relative w-full pt-20 pb-32 bg-surface px-margin max-w-xl mx-auto">
+      <main className="flex-1 flex flex-col relative w-full pt-20 pb-32 bg-surface px-margin max-w-xl mx-auto font-thmanyah">
         <div className="flex flex-col w-full pb-10">
           {/* Current Book Summary Card */}
           {old && (

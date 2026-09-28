@@ -78,7 +78,7 @@ export default function Dashboard() {
           <span className="material-symbols-outlined text-secondary text-[36px] animate-spin">
             dashboard
           </span>
-          <p className="font-body-md text-on-surface-variant">جارٍ تحميل لوحة التحكم...</p>
+          <p className="font-body-md text-on-surface-variant font-thmanyah">جارٍ تحميل لوحة التحكم...</p>
         </div>
       </main>
     );
@@ -108,22 +108,22 @@ export default function Dashboard() {
               </span>
             </div>
             <div className="flex flex-col">
-              <span className="font-label-sm text-label-sm text-secondary leading-tight font-medium">
-                نادي الكتّاب
+              <span
+                className="text-label-sm text-secondary leading-tight font-semibold font-ballet"
+                style={{ fontFamily: "Ballet, serif" }}
+              >
+                The Bookish Club
               </span>
-              <h1 className="font-title-md text-title-md text-primary leading-tight tracking-tight font-semibold">
-                Admin Dashboard
+              <h1 className="font-title-md text-title-md text-primary leading-tight tracking-tight font-bold font-thmanyah">
+                لوحة التحكم
               </h1>
             </div>
-          </div>
-          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
-            <span className="material-symbols-outlined text-on-primary text-[18px]">person</span>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col relative w-full pt-20 pb-24 bg-surface px-margin max-w-2xl mx-auto">
+      <main className="flex-1 flex flex-col relative w-full pt-20 pb-24 bg-surface px-margin max-w-2xl mx-auto font-thmanyah">
         <div className="flex flex-col w-full pb-8 space-y-space-lg select-none">
           {error && (
             <div className="p-3 bg-error-container text-on-error-container rounded-xl text-body-sm font-medium">
@@ -132,7 +132,7 @@ export default function Dashboard() {
           )}
 
           {/* Top Admin Welcome Bar */}
-          <section className="flex items-center justify-between bg-surface-container-low px-space-md py-space-sm rounded-xl shadow-sm">
+          <section className="flex items-center justify-between bg-surface-container-low px-space-md py-space-sm rounded-xl shadow-sm border border-surface-container-high">
             <div className="flex items-center gap-space-sm">
               <div className="relative w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
                 <span className="material-symbols-outlined text-on-secondary-container text-[22px]">
@@ -296,7 +296,7 @@ export default function Dashboard() {
               </a>
             </div>
 
-            {/* Filter chips */}
+            {/* Filter chips with Western numerals */}
             <div className="flex items-center gap-space-sm overflow-x-auto pb-1">
               <button
                 className={`px-3 py-1.5 rounded-full font-label-md text-label-md shrink-0 shadow-sm transition-all active:scale-95 cursor-pointer ${
@@ -318,7 +318,7 @@ export default function Dashboard() {
                 onClick={() => setFilter("high")}
                 type="button"
               >
-                الأعلى تقييماً (٤+)
+                الأعلى تقييماً (4+)
               </button>
               <button
                 className={`px-3 py-1.5 rounded-full font-label-md text-label-md shrink-0 shadow-sm transition-all active:scale-95 cursor-pointer ${
@@ -338,7 +338,7 @@ export default function Dashboard() {
           <section className="flex flex-col space-y-space-md">
             {filteredReviews.length === 0 ? (
               <div className="p-8 text-center text-on-surface-variant bg-surface-container-lowest rounded-xl shadow-sm border border-surface-container-high">
-                 لا توجد مراجعات تطابق تصفيتك.
+                لا توجد مراجعات تطابق تصفيتك.
               </div>
             ) : (
               filteredReviews.map((r) => (
@@ -356,9 +356,9 @@ export default function Dashboard() {
                           {r.member_name}
                         </span>
                         <span className="font-label-sm text-label-sm text-outline">
-                          {new Date(r.created_at).toLocaleDateString("ar-EG", {
+                          {new Date(r.created_at).toLocaleDateString("en-US", {
                             year: "numeric",
-                            month: "short",
+                            month: "numeric",
                             day: "numeric"
                           })}
                         </span>
@@ -418,7 +418,7 @@ export default function Dashboard() {
       </main>
 
       {/* Fixed Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-low/90 backdrop-blur-xl shadow-[0_-4px_16px_rgba(65,40,23,0.06)] border-t border-outline-variant/30">
+      <nav className="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-low/90 backdrop-blur-xl shadow-[0_-4px_16px_rgba(65,40,23,0.06)] border-t border-outline-variant/30 font-thmanyah">
         <div className="flex justify-around items-center h-16 max-w-md mx-auto px-space-xs">
           <a
             className="flex flex-col items-center justify-center gap-1 w-16 h-12 text-primary font-semibold"

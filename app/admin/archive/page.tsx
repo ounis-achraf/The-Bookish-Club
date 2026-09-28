@@ -37,7 +37,7 @@ export default function Archive() {
           <span className="material-symbols-outlined text-secondary text-[36px] animate-spin">
             collections_bookmark
           </span>
-          <p className="font-body-md text-on-surface-variant">جارٍ تحميل الأرشيف...</p>
+          <p className="font-body-md text-on-surface-variant font-thmanyah">جارٍ تحميل الأرشيف...</p>
         </div>
       </main>
     );
@@ -62,18 +62,15 @@ export default function Archive() {
                 collections_bookmark
               </span>
             </div>
-            <h1 className="font-title-md text-title-md text-primary leading-tight font-semibold">
+            <h1 className="font-title-md text-title-md text-primary leading-tight font-semibold font-thmanyah">
               أرشيف الكتب السابقة
             </h1>
-          </div>
-          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
-            <span className="material-symbols-outlined text-on-primary text-[18px]">person</span>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col relative w-full pt-20 pb-24 bg-surface px-margin max-w-2xl mx-auto">
+      <main className="flex-1 flex flex-col relative w-full pt-20 pb-24 bg-surface px-margin max-w-2xl mx-auto font-thmanyah">
         <div className="flex flex-col w-full pb-8">
           <div className="mb-6 flex items-center justify-between">
             <h2 className="font-headline-sm text-headline-sm text-primary font-bold">
@@ -128,7 +125,7 @@ export default function Archive() {
       </main>
 
       {/* Fixed Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-low/90 backdrop-blur-xl shadow-[0_-4px_16px_rgba(65,40,23,0.06)] border-t border-outline-variant/30">
+      <nav className="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-low/90 backdrop-blur-xl shadow-[0_-4px_16px_rgba(65,40,23,0.06)] border-t border-outline-variant/30 font-thmanyah">
         <div className="flex justify-around items-center h-16 max-w-md mx-auto px-space-xs">
           <a
             className="flex flex-col items-center justify-center gap-1 w-16 h-12 text-on-surface-variant hover:text-primary transition-colors"
