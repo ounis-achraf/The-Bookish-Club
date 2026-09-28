@@ -362,7 +362,7 @@ export default function Dashboard() {
                       <div className="flex items-center gap-0.5 text-tertiary-fixed-dim shrink-0">
                         {[1, 2, 3, 4, 5].map((n) => (
                           <span
-                            className="material-symbols-outlined text-[13px]"
+                            className="material-symbols-outlined text-[11px]"
                             key={n}
                             style={{ fontVariationSettings: `'FILL' ${n <= r.rating ? 1 : 0}` }}
                           >

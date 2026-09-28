@@ -89,7 +89,7 @@ export default function Archive() {
         {[1, 2, 3, 4, 5].map((s) => (
           <span
             key={s}
-            className={`material-symbols-outlined text-[13px] ${
+            className={`material-symbols-outlined text-[11px] ${
               s <= rating ? "text-tertiary" : "text-outline/30"
             }`}
             style={{ fontVariationSettings: "'FILL' 1" }}
