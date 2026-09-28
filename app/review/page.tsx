@@ -1,72 +1,470 @@
- "use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { createClient } from "../../lib/supabase";
 
-type Book = { id:string; title:string; author:string; cover_url:string|null };
+type Book = { id: string; title: string; author: string; cover_url: string | null };
+
+const RATING_TEXTS: Record<number, string> = {
+  1: "انقر للتقييم: غير مُرضٍ (١ من ٥)",
+  2: "انقر للتقييم: مقبول (٢ من ٥)",
+  3: "انقر للتقييم: جيد (٣ من ٥)",
+  4: "انقر للتقييم: رائع جداً (٤ من ٥)",
+  5: "انقر للتقييم: ممتاز (٥ من ٥)"
+};
 
 export default function ReviewPage() {
   const supabase = createClient();
-  const [book, setBook] = useState<Book|null>(null);
+  const [book, setBook] = useState<Book | null>(null);
   const [name, setName] = useState("");
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(5);
   const [text, setText] = useState("");
-  const [photo, setPhoto] = useState<File|null>(null);
+  const [photo, setPhoto] = useState<File | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    supabase.from("books").select("id,title,author,cover_url").eq("is_current", true).maybeSingle()
-      .then(({data,error}) => { if(error) setError(error.message); setBook(data); setLoading(false); });
+    supabase
+      .from("books")
+      .select("id,title,author,cover_url")
+      .eq("is_current", true)
+      .maybeSingle()
+      .then(({ data, error }) => {
+        if (error) setError(error.message);
+        setBook(data);
+        setLoading(false);
+      });
   }, []);
 
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setPhoto(file);
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setPhotoPreview(url);
+    } else {
+      setPhotoPreview(null);
+    }
+  };
+
+  const removePhoto = () => {
+    setPhoto(null);
+    if (photoPreview) {
+      URL.revokeObjectURL(photoPreview);
+      setPhotoPreview(null);
+    }
+  };
+
   async function submit(e: React.FormEvent) {
-    e.preventDefault(); setError("");
+    e.preventDefault();
+    setError("");
     if (!book || !name.trim() || !text.trim() || rating < 1) {
-      setError("Please complete your name, rating, and review."); return;
+      setError("يرجى إكمال الاسم والتقييم والمراجعة.");
+      return;
     }
     setSending(true);
     try {
-      let photo_url: string|null = null;
+      let photo_url: string | null = null;
       if (photo) {
-        if (photo.size > 5*1024*1024) throw new Error("Photo must be 5 MB or smaller.");
+        if (photo.size > 5 * 1024 * 1024) throw new Error("يجب أن تكون الصورة 5 ميجابايت أو أقل.");
         const ext = photo.name.split(".").pop()?.toLowerCase() || "jpg";
         const path = `${crypto.randomUUID()}.${ext}`;
-        const { error: uploadError } = await supabase.storage.from("review-photos").upload(path, photo, { contentType: photo.type });
+        const { error: uploadError } = await supabase.storage
+          .from("review-photos")
+          .upload(path, photo, { contentType: photo.type });
         if (uploadError) throw uploadError;
         photo_url = supabase.storage.from("review-photos").getPublicUrl(path).data.publicUrl;
       }
       const { error: insertError } = await supabase.from("reviews").insert({
-        book_id: book.id, member_name: name.trim(), rating, review_text: text.trim(), photo_url
+        book_id: book.id,
+        member_name: name.trim(),
+        rating,
+        review_text: text.trim(),
+        photo_url
       });
       if (insertError) throw insertError;
       setDone(true);
-    } catch(err:any) { setError(err.message || "Something went wrong."); }
-    finally { setSending(false); }
+    } catch (err: any) {
+      setError(err.message || "حدث خطأ غير متوقع.");
+    } finally {
+      setSending(false);
+    }
   }
 
-  if (loading) return <main className="center">Loading this month’s book…</main>;
-  if (!book) return <main className="center"><div><h1>No current book</h1><p>The club is between books right now.</p></div></main>;
+  const resetForm = () => {
+    setName("");
+    setRating(5);
+    setText("");
+    removePhoto();
+    setError("");
+    setDone(false);
+  };
 
-  if (done) return <main className="center"><div className="success"><div className="check">✓</div><h1>Review submitted!</h1><p>Thank you for sharing your thoughts about <strong>{book.title}</strong>.</p><button onClick={()=>location.reload()}>Submit another review</button></div></main>;
+  if (loading) {
+    return (
+      <main className="flex-1 flex flex-col justify-center items-center min-h-screen bg-surface px-margin">
+        <div className="flex flex-col items-center gap-3">
+          <span className="material-symbols-outlined text-secondary text-[36px] animate-spin">
+            auto_stories
+          </span>
+          <p className="font-body-md text-on-surface-variant">جارٍ تحميل كتاب هذا الشهر...</p>
+        </div>
+      </main>
+    );
+  }
 
-  return <main className="member-shell">
-    <section className="book-hero">
-      <div className="eyebrow">THIS MONTH’S BOOK</div>
-      {book.cover_url ? <img className="cover" src={book.cover_url} alt={`Cover of ${book.title}`} /> : <div className="cover placeholder">📖</div>}
-      <h1>{book.title}</h1><p className="author">{book.author}</p>
-    </section>
-    <form className="card form" onSubmit={submit}>
-      <h2>Share your thoughts</h2>
-      <label>Your name<input value={name} onChange={e=>setName(e.target.value)} placeholder="Your name" maxLength={100}/></label>
-      <fieldset><legend>Your rating</legend><div className="stars">{[1,2,3,4,5].map(n=><button type="button" key={n} className={n<=rating?"star active":"star"} onClick={()=>setRating(n)} aria-label={`${n} stars`}>★</button>)}</div></fieldset>
-      <label>Your review<textarea value={text} onChange={e=>setText(e.target.value)} placeholder="What did you think about the book?" maxLength={5000}/></label>
-      <label>Photo <span className="optional">optional</span><input type="file" accept="image/jpeg,image/png,image/webp" onChange={e=>setPhoto(e.target.files?.[0]||null)}/></label>
-      {photo && <div className="file-name">{photo.name}</div>}
-      {error && <div className="error">{error}</div>}
-      <button className="primary" disabled={sending}>{sending ? "Sending…" : "SEND REVIEW"}</button>
-    </form>
-  </main>;
+  if (!book) {
+    return (
+      <main className="flex-1 flex flex-col justify-center items-center min-h-screen bg-surface px-margin text-center">
+        <div className="bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm max-w-sm w-full">
+          <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-secondary mx-auto mb-4">
+            <span className="material-symbols-outlined text-[32px]">menu_book</span>
+          </div>
+          <h1 className="font-headline-md text-primary font-semibold mb-2">لا يوجد كتاب حالي</h1>
+          <p className="font-body-md text-on-surface-variant">النادي في فترة استراحة بين الكتب حالياً.</p>
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <>
+      {/* Fixed Top Header */}
+      <header className="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_12px_rgba(65,40,23,0.06)] pt-safe">
+        <div className="h-16 px-margin flex items-center justify-between">
+          <div className="flex items-center gap-space-sm">
+            <button
+              aria-label="الرجوع للخلف"
+              className="w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary transition-colors"
+              onClick={() => history.back()}
+              type="button"
+            >
+              <span className="material-symbols-outlined text-[24px]">arrow_forward</span>
+            </button>
+            <div className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center p-1.5 shadow-sm">
+              <span className="material-symbols-outlined text-primary text-[18px]">auto_stories</span>
+            </div>
+            <h1 className="font-title-md text-title-md text-primary leading-tight font-semibold">
+              The Bookish Club
+            </h1>
+          </div>
+          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+            <span className="material-symbols-outlined text-on-primary text-[18px]">person</span>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-1 flex flex-col relative w-full pt-20 pb-safe bg-surface px-margin max-w-xl mx-auto">
+        <div className="flex flex-col w-full pb-10">
+          {/* Literary Brand Header */}
+          <section className="flex flex-col items-center justify-center text-center py-4 px-margin mb-2">
+            <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center p-2 mb-3 shadow-sm">
+              <span className="material-symbols-outlined text-primary text-[32px]">menu_book</span>
+            </div>
+            <span
+              className="font-headline-lg text-headline-lg text-primary tracking-wide mb-0.5"
+              style={{ fontFamily: "Noto Serif, serif" }}
+            >
+              The Bookish Club
+            </span>
+            <p className="font-label-md text-label-md text-secondary tracking-widest">
+              نادي الكتّاب • جلسات القراءة الحوارية
+            </p>
+          </section>
+
+          {/* Current Book Spotlight Card */}
+          <section className="w-full bg-surface-container-lowest rounded-xl p-space-md mb-space-lg shadow-sm">
+            <div className="flex items-start gap-space-md">
+              <div className="relative w-20 h-28 rounded-lg overflow-hidden shrink-0 shadow-md bg-surface-variant flex items-center justify-center">
+                {book.cover_url ? (
+                  <img
+                    alt={`غلاف ${book.title}`}
+                    className="w-full h-full object-cover"
+                    src={book.cover_url}
+                  />
+                ) : (
+                  <span className="material-symbols-outlined text-secondary text-[36px]">
+                    book
+                  </span>
+                )}
+              </div>
+              <div className="flex flex-col min-w-0 flex-1 justify-center">
+                <div className="flex items-center gap-space-xs mb-1">
+                  <span className="material-symbols-outlined text-secondary text-[16px]">
+                    menu_book
+                  </span>
+                  <span className="font-label-sm text-label-sm text-secondary uppercase font-semibold">
+                    كتاب هذا الشهر
+                  </span>
+                </div>
+                <h2 className="font-headline-sm text-headline-sm text-primary truncate leading-tight mb-0.5 font-bold">
+                  {book.title}
+                </h2>
+                <p className="font-body-sm text-body-sm text-on-surface-variant mb-2 font-medium">
+                  {book.author}
+                </p>
+                <p className="font-body-sm text-body-sm text-on-surface-variant/80 italic leading-relaxed line-clamp-2">
+                  "شاركونا انطباعاتكم ومشاعركم الصادقة حول قراءة هذا الشهر لنناقشها سوياً."
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {done ? (
+            /* Confirmation Success Card */
+            <div
+              className="w-full bg-surface-container-lowest rounded-xl p-space-xl text-center shadow-lg flex flex-col items-center justify-center my-4"
+              id="success-confirmation"
+            >
+              <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-secondary mb-space-md animate-bounce">
+                <span
+                  className="material-symbols-outlined text-[36px]"
+                  style={{ fontVariationSettings: "'FILL' 1" }}
+                >
+                  check_circle
+                </span>
+              </div>
+              <h3 className="font-headline-md text-headline-md text-primary mb-space-xs font-bold">
+                شكراً لمشاركتك القيّمة!
+              </h3>
+              <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed max-w-xs mb-space-lg">
+                تم استلام مراجعتك حول كتاب <strong>"{book.title}"</strong> بنجاح. ستُدرج ضمن محاور
+                نقاشنا الأدبي في جلسة النادي القادمة وتظهر على لوحة الأعضاء.
+              </p>
+              <div className="w-full flex flex-col gap-space-sm">
+                <button
+                  className="w-full h-12 bg-primary-container text-on-primary font-title-md text-title-md font-semibold rounded-xl shadow-sm active:bg-primary transition-all hover:bg-primary"
+                  onClick={resetForm}
+                  type="button"
+                >
+                  إرسال مراجعة أخرى
+                </button>
+                <button
+                  className="w-full h-11 bg-surface-container text-primary font-label-lg text-label-lg rounded-xl active:bg-surface-variant transition-all font-medium"
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  type="button"
+                >
+                  العودة لأعلى الصفحة
+                </button>
+              </div>
+            </div>
+          ) : (
+            /* Interactive Review Form Container */
+            <div
+              className="w-full bg-surface-container-lowest rounded-xl p-space-md sm:p-space-lg shadow-sm"
+              id="review-form-container"
+            >
+              <div className="mb-space-lg">
+                <h3 className="font-headline-md text-headline-md text-primary mb-1 font-bold">
+                  شاركنا رأيك
+                </h3>
+                <p className="font-body-sm text-body-sm text-on-surface-variant">
+                  رأيك القيّم يثري حوارنا القادم في الجلسة الأدبية الشهرية
+                </p>
+              </div>
+
+              <form className="flex flex-col gap-space-lg" onSubmit={submit}>
+                {/* Input: Name */}
+                <div className="flex flex-col gap-space-xs">
+                  <label
+                    className="font-label-lg text-label-lg text-primary font-medium flex items-center justify-between"
+                    htmlFor="reviewer-name"
+                  >
+                    <span>الاسم</span>
+                    <span className="text-secondary font-normal font-label-sm text-label-sm">
+                      مطلوب
+                    </span>
+                  </label>
+                  <div className="relative w-full">
+                    <input
+                      className="w-full h-12 px-space-md pr-4 pl-10 bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/60 rounded-lg outline-none font-body-md text-body-md focus:bg-surface-container transition-all"
+                      id="reviewer-name"
+                      maxLength={100}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="اسمك الكريم أو اسم الشهرة"
+                      required
+                      type="text"
+                      value={name}
+                    />
+                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 pointer-events-none text-[20px]">
+                      person_outline
+                    </span>
+                  </div>
+                </div>
+
+                {/* Rating Section */}
+                <div className="flex flex-col gap-space-xs">
+                  <span className="font-label-lg text-label-lg text-primary font-medium">
+                    التقييم العام
+                  </span>
+                  <div className="bg-surface-container-low rounded-xl p-space-md flex flex-col items-center justify-center gap-space-sm">
+                    <div className="flex items-center gap-2" dir="ltr" id="star-rating-group">
+                      {[1, 2, 3, 4, 5].map((n) => (
+                        <button
+                          aria-label={`${n} نجوم`}
+                          className={`star-btn transition-transform active:scale-90 p-1 ${
+                            n <= rating ? "text-[#C08A3E]" : "text-on-surface-variant/40"
+                          }`}
+                          key={n}
+                          onClick={() => setRating(n)}
+                          type="button"
+                        >
+                          <span
+                            className="material-symbols-outlined text-[34px] leading-none"
+                            style={{ fontVariationSettings: `'FILL' ${n <= rating ? 1 : 0}` }}
+                          >
+                            star
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                    <span
+                      className="font-label-md text-label-md text-secondary font-medium"
+                      id="rating-label"
+                    >
+                      {RATING_TEXTS[rating] || "انقر للتقييم"}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Input: Review Textarea */}
+                <div className="flex flex-col gap-space-xs">
+                  <label
+                    className="font-label-lg text-label-lg text-primary font-medium flex items-center justify-between"
+                    htmlFor="review-content"
+                  >
+                    <span>مراجعتك الأدبية</span>
+                    <span className="text-secondary font-normal font-label-sm text-label-sm">
+                      مطلوب
+                    </span>
+                  </label>
+                  <textarea
+                    className="w-full p-space-md bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/60 rounded-lg outline-none font-body-md text-body-md focus:bg-surface-container transition-all resize-none leading-relaxed"
+                    id="review-content"
+                    maxLength={5000}
+                    onChange={(e) => setText(e.target.value)}
+                    placeholder="ما رأيك في أسلوب السرد، بناء الشخصيات، أو الفكرة المركزية؟ شاركنا أكثر اقتباس أو فكرة أثرت فيك..."
+                    required
+                    rows={4}
+                    value={text}
+                  />
+                </div>
+
+                {/* Photo Upload Box / Attachment */}
+                <div className="flex flex-col gap-space-xs">
+                  <span className="font-label-lg text-label-lg text-primary font-medium flex items-center justify-between">
+                    <span>إضافة صورة من جلستك</span>
+                    <span className="text-on-surface-variant/70 font-normal font-label-sm text-label-sm">
+                      اختياري
+                    </span>
+                  </span>
+
+                  {photoPreview ? (
+                    /* Attached Photo Preview Card */
+                    <div className="relative bg-surface-container-low rounded-xl p-space-sm flex items-center justify-between gap-space-md">
+                      <div className="flex items-center gap-space-md min-w-0">
+                        <div className="w-14 h-14 rounded-lg overflow-hidden shrink-0 shadow-sm bg-surface-container">
+                          <img
+                            alt="صورة مرفقة"
+                            className="w-full h-full object-cover"
+                            src={photoPreview}
+                          />
+                        </div>
+                        <div className="flex flex-col min-w-0">
+                          <span className="font-label-md text-label-md text-primary font-medium truncate">
+                            {photo?.name}
+                          </span>
+                          <span className="font-label-sm text-label-sm text-secondary">
+                            جاهزة للمشاركة
+                          </span>
+                        </div>
+                      </div>
+                      <button
+                        aria-label="حذف الصورة"
+                        className="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-error transition-colors shrink-0"
+                        onClick={removePhoto}
+                        type="button"
+                      >
+                        <span className="material-symbols-outlined text-[18px]">close</span>
+                      </button>
+                    </div>
+                  ) : (
+                    /* Upload Button Box */
+                    <label className="w-full bg-surface-container-low rounded-xl p-space-md text-center flex flex-col items-center justify-center gap-space-xs cursor-pointer hover:bg-surface-container transition-colors border border-dashed border-outline-variant">
+                      <input
+                        accept="image/jpeg,image/png,image/webp"
+                        className="hidden"
+                        onChange={handlePhotoChange}
+                        type="file"
+                      />
+                      <div className="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-secondary">
+                        <span className="material-symbols-outlined text-[22px]">
+                          add_a_photo
+                        </span>
+                      </div>
+                      <p className="font-label-md text-label-md text-primary font-medium">
+                        التقط صورة أو اختر من المعرض
+                      </p>
+                      <p className="font-label-sm text-label-sm text-on-surface-variant/70">
+                        لكوب قهوتك، الكتاب، أو ملاحظاتك
+                      </p>
+                    </label>
+                  )}
+                </div>
+
+                {/* Literary Quote Divider */}
+                <div className="bg-surface-container-low rounded-lg p-space-sm pr-space-md relative overflow-hidden flex items-center gap-space-sm">
+                  <div className="w-1 h-8 bg-secondary rounded-full shrink-0"></div>
+                  <p className="font-body-sm text-body-sm text-on-surface-variant italic">
+                    "إن القراءة ليست عملاً سلبياً.. إنها حوار ممتد بين كاتب يسأل وقارئ يجيب."
+                  </p>
+                </div>
+
+                {error && (
+                  <div className="p-3 bg-error-container text-on-error-container rounded-xl text-body-sm font-medium">
+                    {error}
+                  </div>
+                )}
+
+                {/* Action Button */}
+                <button
+                  className="w-full h-12 bg-primary-container text-on-primary font-title-md text-title-md font-semibold rounded-xl shadow-md hover:bg-primary active:bg-primary transition-all flex items-center justify-center gap-space-sm disabled:opacity-60 cursor-pointer"
+                  disabled={sending}
+                  type="submit"
+                >
+                  {sending ? (
+                    <>
+                      <span className="material-symbols-outlined animate-spin text-[20px]">
+                        autorenew
+                      </span>
+                      <span>جارٍ الإرسال...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>إرسال المراجعة</span>
+                      <span className="material-symbols-outlined text-[20px]">send</span>
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+          )}
+
+          {/* Literary Footnote */}
+          <footer className="mt-space-lg text-center flex flex-col items-center justify-center gap-1">
+            <div className="flex items-center gap-1 text-on-surface-variant/50">
+              <span className="material-symbols-outlined text-[16px]">local_cafe</span>
+              <span className="font-label-sm text-label-sm">
+                طابت أوقاتكم برفقة الكتب والمشروبات الدافئة
+              </span>
+            </div>
+          </footer>
+        </div>
+      </main>
+    </>
+  );
 }
