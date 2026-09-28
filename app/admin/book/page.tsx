@@ -16,6 +16,7 @@ export default function BookManager() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [showWarning, setShowWarning] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -50,17 +51,18 @@ export default function BookManager() {
     }
   };
 
-  async function save(e: React.FormEvent) {
+  async function requestSave(e: React.FormEvent) {
     e.preventDefault();
     if (!title.trim() || !author.trim()) {
       setError("يرجى إدخال عنوان الكتاب واسم المؤلف.");
       return;
     }
+    // Show in-app warning instead of browser confirm()
+    setShowWarning(true);
+  }
 
-    if (!confirm("سيتم ارشفة الكتاب السابق واعتماد مراجعات جديدة! هل انت متأكد؟")) {
-      return;
-    }
-
+  async function confirmSave() {
+    setShowWarning(false);
     setSaving(true);
     setError("");
     try {
@@ -169,7 +171,7 @@ export default function BookManager() {
           )}
 
           {/* Form Container Card */}
-          <form className="flex flex-col gap-space-md" onSubmit={save}>
+          <form className="flex flex-col gap-space-md" onSubmit={requestSave}>
             <div className="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm border border-surface-container-high flex flex-col gap-space-md">
               <div className="flex items-center gap-space-sm mb-1 pb-space-xs border-b border-surface-container">
                 <span className="material-symbols-outlined text-primary text-[20px]">auto_stories</span>
@@ -329,27 +331,74 @@ export default function BookManager() {
               </div>
             )}
 
-            {/* Sticky Bottom Actions Bar */}
-            <div className="fixed bottom-4 left-margin right-margin z-40 max-w-xl mx-auto inset-x-0 px-4">
+            {/* In-app warning banner (replaces browser confirm popup) */}
+            <div
+              className={`fixed bottom-4 left-0 right-0 z-40 max-w-xl mx-auto px-4 transition-all duration-300 ease-in-out ${
+                showWarning ? "translate-y-0 opacity-100 pointer-events-auto" : "translate-y-8 opacity-0 pointer-events-none"
+              }`}
+            >
+              <div className="bg-inverse-surface rounded-2xl shadow-2xl p-space-md flex flex-col gap-space-sm border border-outline-variant/20">
+                <div className="flex items-start gap-space-sm">
+                  <div className="w-9 h-9 rounded-full bg-tertiary-fixed/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="material-symbols-outlined text-tertiary-fixed-dim text-[20px]">
+                      warning
+                    </span>
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className="font-title-md text-title-md text-inverse-on-surface font-bold mb-0.5">
+                      تأكيد الاعتماد
+                    </span>
+                    <p className="font-body-sm text-body-sm text-inverse-on-surface/80 leading-relaxed">
+                      سيتم ارشفة الكتاب السابق واعتماد مراجعات جديدة! هل انت متأكد؟
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-space-sm pt-1">
+                  <button
+                    className="flex-1 h-11 bg-tertiary-fixed-dim text-inverse-surface font-title-md text-title-md font-semibold rounded-xl flex items-center justify-center gap-1.5 shadow-sm hover:opacity-90 active:scale-[0.99] transition-all cursor-pointer"
+                    disabled={saving}
+                    onClick={confirmSave}
+                    type="button"
+                  >
+                    {saving ? (
+                      <>
+                        <span className="material-symbols-outlined animate-spin text-[18px]">autorenew</span>
+                        <span>جارٍ الحفظ...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="material-symbols-outlined text-[18px]">check</span>
+                        <span>تأكيد الاعتماد</span>
+                      </>
+                    )}
+                  </button>
+                  <button
+                    className="h-11 px-space-md text-inverse-on-surface/70 hover:text-inverse-on-surface font-label-lg text-label-lg rounded-xl hover:bg-inverse-on-surface/10 transition-colors font-medium cursor-pointer"
+                    onClick={() => setShowWarning(false)}
+                    type="button"
+                  >
+                    إلغاء
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Default Sticky Bottom Actions Bar (hidden when warning is visible) */}
+            <div
+              className={`fixed bottom-4 left-0 right-0 z-30 max-w-xl mx-auto px-4 transition-all duration-300 ease-in-out ${
+                showWarning ? "translate-y-8 opacity-0 pointer-events-none" : "translate-y-0 opacity-100 pointer-events-auto"
+              }`}
+            >
               <div className="bg-surface-container-lowest/95 backdrop-blur-md rounded-2xl shadow-xl p-space-sm flex items-center gap-space-sm border border-outline-variant/30">
                 <button
                   className="flex-1 h-12 bg-primary-container text-on-primary font-title-md text-title-md font-semibold rounded-xl flex items-center justify-center gap-space-xs shadow-md hover:bg-primary active:bg-primary transition-all disabled:opacity-60 cursor-pointer"
                   disabled={saving}
                   type="submit"
                 >
-                  {saving ? (
-                    <>
-                      <span className="material-symbols-outlined animate-spin text-[20px]">
-                        autorenew
-                      </span>
-                      <span>جارٍ الحفظ...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="material-symbols-outlined text-[20px]">check</span>
-                      <span>اعتماد هذا الكتاب</span>
-                    </>
-                  )}
+                  <>
+                    <span className="material-symbols-outlined text-[20px]">check</span>
+                    <span>اعتماد هذا الكتاب</span>
+                  </>
                 </button>
                 <button
                   className="h-12 px-space-md text-on-surface-variant hover:text-primary font-label-lg text-label-lg rounded-xl hover:bg-surface-container transition-colors font-medium cursor-pointer"
