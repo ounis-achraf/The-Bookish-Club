@@ -56,6 +56,11 @@ export default function BookManager() {
       setError("يرجى إدخال عنوان الكتاب واسم المؤلف.");
       return;
     }
+
+    if (!confirm("سيتم ارشفة الكتاب السابق واعتماد مراجعات جديدة! هل انت متأكد؟")) {
+      return;
+    }
+
     setSaving(true);
     setError("");
     try {
