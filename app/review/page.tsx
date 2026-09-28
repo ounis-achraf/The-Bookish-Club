@@ -246,7 +246,7 @@ export default function ReviewPage() {
                   <div className="relative w-full">
                     <input
                       className="w-full h-12 px-space-md pr-4 pl-10 bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/60 rounded-lg outline-none font-body-md text-body-md focus:bg-surface-container transition-all"
-                      dir="auto"
+                      dir={name ? "auto" : "rtl"}
                       id="reviewer-name"
                       maxLength={100}
                       onChange={(e) => setName(e.target.value)}
@@ -309,7 +309,7 @@ export default function ReviewPage() {
                   </label>
                   <textarea
                     className="w-full p-space-md bg-surface-container-low text-on-surface placeholder:text-on-surface-variant/60 rounded-lg outline-none font-body-md text-body-md focus:bg-surface-container transition-all resize-none leading-relaxed"
-                    dir="auto"
+                    dir={text ? "auto" : "rtl"}
                     id="review-content"
                     maxLength={5000}
                     onChange={(e) => setText(e.target.value)}
