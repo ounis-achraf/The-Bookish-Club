@@ -1,0 +1,5 @@
+ "use client";
+import {useEffect,useState} from "react";
+import {createClient} from "../../../lib/supabase";
+import {useRouter} from "next/navigation";
+export default function Archive(){const s=createClient(),router=useRouter();const [books,setBooks]=useState<any[]>([]);useEffect(()=>{(async()=>{const {data:{user}}=await s.auth.getUser();if(!user){router.replace("/admin/login");return}const {data}=await s.from("books").select("*,reviews(count)").eq("is_current",false).order("created_at",{ascending:false});setBooks(data||[])})()},[]);return <main className="admin-shell"><header className="admin-header"><div><a href="/admin/dashboard">← Dashboard</a><div className="eyebrow">BOOK CLUB</div><h1>Book archive</h1></div></header><div className="archive-grid">{books.length===0?<div className="empty card">No previous books yet.</div>:books.map(b=><article className="card archive-card" key={b.id}>{b.cover_url?<img className="admin-cover" src={b.cover_url}/>:<div className="admin-cover placeholder">📖</div>}<div><h2>{b.title}</h2><p>{b.author}</p><small>{b.reviews?.[0]?.count||0} reviews</small></div></article>)}</div></main>}
