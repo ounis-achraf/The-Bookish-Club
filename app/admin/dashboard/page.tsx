@@ -339,13 +339,13 @@ export default function Dashboard() {
                   className="flex flex-col p-space-md bg-surface-container-lowest rounded-xl shadow-sm space-y-space-sm transition-all border border-surface-container-high"
                   key={r.id}
                 >
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-space-sm">
-                      <div className="w-10 h-10 rounded-full bg-primary-fixed-dim/40 flex items-center justify-center font-bold text-primary font-title-md shrink-0">
+                  <div className="flex items-center justify-between gap-space-sm">
+                    <div className="flex items-center gap-space-sm min-w-0 flex-1">
+                      <div className="w-8 h-8 rounded-full bg-primary-fixed-dim/40 flex items-center justify-center font-bold text-primary font-title-md shrink-0 text-[13px]">
                         {r.member_name.charAt(0).toUpperCase()}
                       </div>
-                      <div className="flex flex-col">
-                        <span dir="auto" className="font-title-md text-title-md text-primary leading-tight font-semibold text-start">
+                      <div className="flex flex-col min-w-0 flex-1">
+                        <span dir="auto" className="font-label-lg text-label-lg text-primary leading-tight font-bold truncate text-start">
                           {r.member_name}
                         </span>
                         <span className="font-label-sm text-label-sm text-outline">
@@ -358,11 +358,11 @@ export default function Dashboard() {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-0.5 text-tertiary-fixed-dim">
+                    <div className="flex items-center gap-2 shrink-0">
+                      <div className="flex items-center gap-0.5 text-tertiary-fixed-dim shrink-0">
                         {[1, 2, 3, 4, 5].map((n) => (
                           <span
-                            className="material-symbols-outlined text-[16px]"
+                            className="material-symbols-outlined text-[13px]"
                             key={n}
                             style={{ fontVariationSettings: `'FILL' ${n <= r.rating ? 1 : 0}` }}
                           >
@@ -372,7 +372,7 @@ export default function Dashboard() {
                       </div>
                       <button
                         aria-label="حذف المراجعة"
-                        className="text-error hover:bg-error-container/40 p-1.5 rounded-lg transition-colors cursor-pointer"
+                        className="text-error hover:bg-error-container/40 p-1.5 rounded-lg transition-colors cursor-pointer shrink-0"
                         onClick={() => remove(r.id)}
                         title="حذف"
                         type="button"

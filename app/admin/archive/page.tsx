@@ -85,11 +85,11 @@ export default function Archive() {
 
   function StarRow({ rating }: { rating: number }) {
     return (
-      <span className="flex gap-0.5" aria-label={`تقييم ${rating} من 5`}>
+      <span className="flex gap-0.5 shrink-0" aria-label={`تقييم ${rating} من 5`}>
         {[1, 2, 3, 4, 5].map((s) => (
           <span
             key={s}
-            className={`material-symbols-outlined text-[16px] ${
+            className={`material-symbols-outlined text-[13px] ${
               s <= rating ? "text-tertiary" : "text-outline/30"
             }`}
             style={{ fontVariationSettings: "'FILL' 1" }}
@@ -328,7 +328,7 @@ export default function Archive() {
                           {i + 1}
                         </span>
                       </div>
-                      <span dir="auto" className="font-title-md text-title-md text-primary font-semibold truncate text-start">
+                      <span dir="auto" className="font-label-lg text-label-lg text-primary font-bold truncate text-start">
                         {r.member_name}
                       </span>
                     </div>
