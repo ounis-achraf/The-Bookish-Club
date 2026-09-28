@@ -101,9 +101,9 @@ export default function Archive() {
   }
 
   function formatDate(iso: string) {
-    return new Date(iso).toLocaleDateString("ar-SA", {
+    return new Date(iso).toLocaleDateString("en-US", {
       year: "numeric",
-      month: "long",
+      month: "numeric",
       day: "numeric"
     });
   }

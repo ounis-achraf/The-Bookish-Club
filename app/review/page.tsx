@@ -123,19 +123,11 @@ export default function ReviewPage() {
 
   return (
     <>
-      {/* Fixed Top Header (No book icon, text centered in the middle) */}
+      {/* Fixed Top Header (Title centered in middle) */}
       <header className="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_12px_rgba(65,40,23,0.06)] pt-safe">
         <div className="h-16 px-margin flex items-center justify-center relative max-w-xl mx-auto">
-          <button
-            aria-label="الرجوع للخلف"
-            className="absolute right-4 w-11 h-11 flex items-center justify-center text-on-surface hover:text-primary transition-colors cursor-pointer"
-            onClick={() => history.back()}
-            type="button"
-          >
-            <span className="material-symbols-outlined text-[24px]">arrow_forward</span>
-          </button>
-          <h1 className="text-headline-sm text-primary leading-tight font-semibold font-ballet text-center" style={{ fontFamily: "Ballet, serif" }}>
-            The Bookish Club
+          <h1 className="font-title-md text-title-md text-primary leading-tight font-semibold font-thmanyah text-center">
+            صفحة المراجعة
           </h1>
         </div>
       </header>
@@ -145,9 +137,6 @@ export default function ReviewPage() {
         <div className="flex flex-col w-full pb-10">
           {/* Literary Brand Header */}
           <section className="flex flex-col items-center justify-center text-center py-4 px-margin mb-2">
-            <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center p-2 mb-3 shadow-sm">
-              <span className="material-symbols-outlined text-primary text-[32px]">menu_book</span>
-            </div>
             <span
               className="text-display-lg text-primary tracking-wide mb-0.5 font-ballet"
               style={{ fontFamily: "Ballet, serif" }}
@@ -214,6 +203,21 @@ export default function ReviewPage() {
               <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed max-w-xs font-thmanyah">
                 تم استلام مراجعتك حول كتاب <strong>"{book.title}"</strong> بنجاح.
               </p>
+              <button
+                className="mt-6 px-6 h-11 bg-primary text-on-primary font-title-md text-title-md font-semibold rounded-xl shadow-md hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
+                onClick={() => {
+                  setDone(false);
+                  setName("");
+                  setRating(5);
+                  setText("");
+                  setPhoto(null);
+                  setPhotoPreview(null);
+                }}
+                type="button"
+              >
+                <span className="material-symbols-outlined text-[20px]">add_circle</span>
+                <span>أضف مراجعة أخرى</span>
+              </button>
             </div>
           ) : (
             /* Interactive Review Form Container */
