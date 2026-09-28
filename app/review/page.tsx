@@ -159,9 +159,6 @@ export default function ReviewPage() {
             >
               The Bookish Club
             </span>
-            <p className="font-label-md text-label-md text-secondary tracking-widest font-thmanyah">
-              نادي الكتّاب • جلسات القراءة الحوارية
-            </p>
           </section>
 
           {/* Current Book Spotlight Card */}
@@ -220,8 +217,7 @@ export default function ReviewPage() {
                 شكراً لمشاركتك القيّمة!
               </h3>
               <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed max-w-xs font-thmanyah">
-                تم استلام مراجعتك حول كتاب <strong>"{book.title}"</strong> بنجاح. ستُدرج ضمن محاور
-                نقاشنا الأدبي في جلسة النادي القادمة وتظهر على لوحة الأعضاء.
+                تم استلام مراجعتك حول كتاب <strong>"{book.title}"</strong> بنجاح.
               </p>
             </div>
           ) : (
@@ -232,11 +228,8 @@ export default function ReviewPage() {
             >
               <div className="mb-space-lg">
                 <h3 className="font-headline-md text-headline-md text-primary mb-1 font-bold font-thmanyah">
-                  شاركنا رأيك
+                  بطــاقة المــراجــعـة
                 </h3>
-                <p className="font-body-sm text-body-sm text-on-surface-variant font-thmanyah">
-                  رأيك القيّم يثري حوارنا القادم في الجلسة الأدبية الشهرية
-                </p>
               </div>
 
               <form className="flex flex-col gap-space-lg" onSubmit={submit}>
@@ -257,7 +250,7 @@ export default function ReviewPage() {
                       id="reviewer-name"
                       maxLength={100}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="اسمك الكريم أو اسم الشهرة"
+                      placeholder="اسمك الكريم"
                       required
                       type="text"
                       value={name}
@@ -278,9 +271,8 @@ export default function ReviewPage() {
                       {[1, 2, 3, 4, 5].map((n) => (
                         <button
                           aria-label={`${n} نجوم`}
-                          className={`star-btn transition-transform active:scale-90 p-1 ${
-                            n <= rating ? "text-[#C08A3E]" : "text-on-surface-variant/40"
-                          }`}
+                          className={`star-btn transition-transform active:scale-90 p-1 ${n <= rating ? "text-[#C08A3E]" : "text-on-surface-variant/40"
+                            }`}
                           key={n}
                           onClick={() => setRating(n)}
                           type="button"
@@ -389,7 +381,7 @@ export default function ReviewPage() {
                 {/* Literary Quote Divider */}
                 <div className="bg-surface-container-low rounded-lg p-space-sm pr-space-md relative overflow-hidden flex items-center gap-space-sm">
                   <div className="w-1 h-8 bg-secondary rounded-full shrink-0"></div>
-                  <p className="font-body-sm text-body-sm text-on-surface-variant italic">
+                  <p className="font-body-sm text-body-sm text-on-surface-variant font-thmanyah">
                     "إن القراءة ليست عملاً سلبياً.. إنها حوار ممتد بين كاتب يسأل وقارئ يجيب."
                   </p>
                 </div>
