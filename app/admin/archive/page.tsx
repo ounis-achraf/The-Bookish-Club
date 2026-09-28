@@ -89,7 +89,7 @@ export default function Archive() {
         {[1, 2, 3, 4, 5].map((s) => (
           <span
             key={s}
-            className={`material-symbols-outlined text-[9px] ${s <= rating ? "text-tertiary" : "text-outline/30"
+            className={`material-symbols-rounded text-[9px] ${s <= rating ? "text-tertiary" : "text-outline/30"
               }`}
             style={{ fontVariationSettings: "'FILL' 1" }}
           >
@@ -112,7 +112,7 @@ export default function Archive() {
     return (
       <main className="flex-1 flex flex-col justify-center items-center min-h-screen bg-surface px-margin">
         <div className="flex flex-col items-center gap-3">
-          <span className="material-symbols-outlined text-secondary text-[36px] animate-spin">
+          <span className="material-symbols-rounded text-secondary text-[36px] animate-spin">
             collections_bookmark
           </span>
           <p className="font-body-md text-on-surface-variant font-thmanyah">جارٍ تحميل الأرشيف...</p>
@@ -132,7 +132,7 @@ export default function Archive() {
             onClick={() => router.push("/admin/dashboard")}
             type="button"
           >
-            <span className="material-symbols-outlined text-[24px]">arrow_forward</span>
+            <span className="material-symbols-rounded text-[24px]">arrow_forward</span>
           </button>
           <h1 className="font-title-md text-title-md text-primary leading-tight font-semibold font-thmanyah text-center">
             أرشيف الكتب السابقة
@@ -167,8 +167,8 @@ export default function Archive() {
                     type="button"
                     onClick={() => openBook(b)}
                     className={`w-full text-right bg-surface-container-lowest rounded-2xl p-space-md shadow-sm border transition-all duration-200 flex gap-space-md items-center cursor-pointer active:scale-[0.99] ${isActive
-                        ? "border-primary/40 shadow-md ring-1 ring-primary/20"
-                        : "border-surface-container-high hover:border-primary/20 hover:shadow-md"
+                      ? "border-primary/40 shadow-md ring-1 ring-primary/20"
+                      : "border-surface-container-high hover:border-primary/20 hover:shadow-md"
                       }`}
                   >
                     {/* Cover */}
@@ -180,7 +180,7 @@ export default function Archive() {
                           src={b.cover_url}
                         />
                       ) : (
-                        <span className="material-symbols-outlined text-secondary text-[28px]">book</span>
+                        <span className="material-symbols-rounded text-secondary text-[28px]">book</span>
                       )}
                     </div>
 
@@ -194,11 +194,11 @@ export default function Archive() {
                       </p>
                       <div className="flex items-center justify-between">
                         <span className="font-label-sm text-label-sm text-outline inline-flex items-center gap-1">
-                          <span className="material-symbols-outlined text-[14px]">rate_review</span>
+                          <span className="material-symbols-rounded text-[14px]">rate_review</span>
                           <span>{reviewCount} مراجعة</span>
                         </span>
                         <span
-                          className={`material-symbols-outlined text-[20px] transition-transform duration-300 ${isActive ? "rotate-180 text-primary" : "text-outline/50"
+                          className={`material-symbols-rounded text-[20px] transition-transform duration-300 ${isActive ? "rotate-180 text-primary" : "text-outline/50"
                             }`}
                         >
                           expand_more
@@ -216,8 +216,8 @@ export default function Archive() {
       {/* Drawer Overlay */}
       <div
         className={`fixed inset-0 z-40 transition-all duration-300 ${drawerOpen
-            ? "bg-black/40 backdrop-blur-sm pointer-events-auto"
-            : "bg-transparent pointer-events-none"
+          ? "bg-black/40 backdrop-blur-sm pointer-events-auto"
+          : "bg-transparent pointer-events-none"
           }`}
         onClick={closeDrawer}
       />
@@ -249,7 +249,7 @@ export default function Archive() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <span className="material-symbols-outlined text-secondary text-[22px]">book</span>
+                    <span className="material-symbols-rounded text-secondary text-[22px]">book</span>
                   </div>
                 )}
               </div>
@@ -268,7 +268,7 @@ export default function Archive() {
                 className="w-9 h-9 rounded-full flex items-center justify-center bg-surface-container hover:bg-surface-container-high transition-colors shrink-0 cursor-pointer"
                 aria-label="إغلاق"
               >
-                <span className="material-symbols-outlined text-[20px] text-secondary">close</span>
+                <span className="material-symbols-rounded text-[20px] text-secondary">close</span>
               </button>
             </div>
           </div>
@@ -278,14 +278,14 @@ export default function Archive() {
         <div className="flex-1 overflow-y-auto px-space-lg py-space-md flex flex-col gap-space-md pb-safe">
           {reviewsLoading ? (
             <div className="flex flex-col items-center justify-center py-12 gap-3">
-              <span className="material-symbols-outlined text-secondary text-[32px] animate-spin">
+              <span className="material-symbols-rounded text-secondary text-[32px] animate-spin">
                 autorenew
               </span>
               <p className="font-body-sm text-on-surface-variant">جارٍ تحميل المراجعات...</p>
             </div>
           ) : reviews.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-12 gap-3">
-              <span className="material-symbols-outlined text-outline text-[40px]">rate_review</span>
+              <span className="material-symbols-rounded text-outline text-[40px]">rate_review</span>
               <p className="font-body-md text-on-surface-variant text-center">
                 لا توجد مراجعات لهذا الكتاب.
               </p>
@@ -299,7 +299,7 @@ export default function Archive() {
                 </span>
                 <div className="flex items-center gap-1.5">
                   <span
-                    className="material-symbols-outlined text-tertiary text-[18px]"
+                    className="material-symbols-rounded text-tertiary text-[18px]"
                     style={{ fontVariationSettings: "'FILL' 1" }}
                   >
                     star
@@ -365,21 +365,21 @@ export default function Archive() {
             className="flex flex-col items-center justify-center gap-1 w-16 h-12 text-on-surface-variant hover:text-primary transition-colors"
             href="/admin/dashboard"
           >
-            <span className="material-symbols-outlined text-[22px]">dashboard</span>
+            <span className="material-symbols-rounded text-[22px]">dashboard</span>
             <span className="font-label-sm text-label-sm">الرئيسية</span>
           </a>
           <a
             className="flex flex-col items-center justify-center gap-1 w-16 h-12 text-on-surface-variant hover:text-primary transition-colors"
             href="/admin/book"
           >
-            <span className="material-symbols-outlined text-[22px]">auto_stories</span>
+            <span className="material-symbols-rounded text-[22px]">auto_stories</span>
             <span className="font-label-sm text-label-sm">كتاب الشهر</span>
           </a>
           <a
             className="flex flex-col items-center justify-center gap-1 w-16 h-12 text-primary font-semibold"
             href="/admin/archive"
           >
-            <span className="material-symbols-outlined text-[22px]">collections_bookmark</span>
+            <span className="material-symbols-rounded text-[22px]">collections_bookmark</span>
             <span className="font-label-sm text-label-sm">الأرشيف</span>
           </a>
         </div>

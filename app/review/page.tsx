@@ -98,7 +98,7 @@ export default function ReviewPage() {
     return (
       <main className="flex-1 flex flex-col justify-center items-center min-h-screen bg-surface px-margin">
         <div className="flex flex-col items-center gap-3">
-          <span className="material-symbols-outlined text-secondary text-[36px] animate-spin">
+          <span className="material-symbols-rounded text-secondary text-[36px] animate-spin">
             auto_stories
           </span>
           <p className="font-body-md text-on-surface-variant font-thmanyah">جارٍ تحميل كتاب هذا الشهر...</p>
@@ -112,7 +112,7 @@ export default function ReviewPage() {
       <main className="flex-1 flex flex-col justify-center items-center min-h-screen bg-surface px-margin text-center">
         <div className="bg-surface-container-lowest p-space-xl rounded-2xl shadow-sm max-w-sm w-full">
           <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-secondary mx-auto mb-4">
-            <span className="material-symbols-outlined text-[32px]">menu_book</span>
+            <span className="material-symbols-rounded text-[32px]">menu_book</span>
           </div>
           <h1 className="font-headline-md text-primary font-semibold mb-2 font-thmanyah">لا يوجد كتاب حالي</h1>
           <p className="font-body-md text-on-surface-variant font-thmanyah">النادي في فترة استراحة بين الكتب حالياً.</p>
@@ -156,14 +156,14 @@ export default function ReviewPage() {
                     src={book.cover_url}
                   />
                 ) : (
-                  <span className="material-symbols-outlined text-secondary text-[36px]">
+                  <span className="material-symbols-rounded text-secondary text-[36px]">
                     book
                   </span>
                 )}
               </div>
               <div className="flex flex-col min-w-0 flex-1 justify-center">
                 <div className="flex items-center gap-space-xs mb-1">
-                  <span className="material-symbols-outlined text-secondary text-[16px]">
+                  <span className="material-symbols-rounded text-secondary text-[16px]">
                     menu_book
                   </span>
                   <span className="font-label-sm text-label-sm text-secondary uppercase font-semibold">
@@ -191,7 +191,7 @@ export default function ReviewPage() {
             >
               <div className="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-secondary mb-space-md animate-bounce">
                 <span
-                  className="material-symbols-outlined text-[36px]"
+                  className="material-symbols-rounded text-[36px]"
                   style={{ fontVariationSettings: "'FILL' 1" }}
                 >
                   check_circle
@@ -215,7 +215,7 @@ export default function ReviewPage() {
                 }}
                 type="button"
               >
-                <span className="material-symbols-outlined text-[20px]">add_circle</span>
+                <span className="material-symbols-rounded text-[20px]">add_circle</span>
                 <span>أضف مراجعة أخرى</span>
               </button>
             </div>
@@ -255,7 +255,7 @@ export default function ReviewPage() {
                       type="text"
                       value={name}
                     />
-                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 pointer-events-none text-[20px]">
+                    <span className="material-symbols-rounded absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 pointer-events-none text-[20px]">
                       person_outline
                     </span>
                   </div>
@@ -271,15 +271,14 @@ export default function ReviewPage() {
                       {[1, 2, 3, 4, 5].map((n) => (
                         <button
                           aria-label={`${n} نجوم`}
-                          className={`star-btn transition-transform active:scale-90 p-1 ${
-                            n <= rating ? "text-[#C08A3E]" : "text-on-surface-variant/40"
-                          }`}
+                          className={`star-btn transition-transform active:scale-90 p-1 ${n <= rating ? "text-[#C08A3E]" : "text-on-surface-variant/40"
+                            }`}
                           key={n}
                           onClick={() => setRating(n)}
                           type="button"
                         >
                           <span
-                            className="material-symbols-outlined text-[34px] leading-none"
+                            className="material-symbols-rounded text-[34px] leading-none"
                             style={{ fontVariationSettings: `'FILL' ${n <= rating ? 1 : 0}` }}
                           >
                             star
@@ -354,7 +353,7 @@ export default function ReviewPage() {
                         onClick={removePhoto}
                         type="button"
                       >
-                        <span className="material-symbols-outlined text-[18px]">close</span>
+                        <span className="material-symbols-rounded text-[18px]">close</span>
                       </button>
                     </div>
                   ) : (
@@ -366,7 +365,7 @@ export default function ReviewPage() {
                         type="file"
                       />
                       <div className="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-secondary">
-                        <span className="material-symbols-outlined text-[22px]">
+                        <span className="material-symbols-rounded text-[22px]">
                           add_a_photo
                         </span>
                       </div>
@@ -402,7 +401,7 @@ export default function ReviewPage() {
                 >
                   {sending ? (
                     <>
-                      <span className="material-symbols-outlined animate-spin text-[20px]">
+                      <span className="material-symbols-rounded animate-spin text-[20px]">
                         autorenew
                       </span>
                       <span>جارٍ الإرسال...</span>
@@ -410,7 +409,7 @@ export default function ReviewPage() {
                   ) : (
                     <>
                       <span>إرسال المراجعة</span>
-                      <span className="material-symbols-outlined text-[20px]">send</span>
+                      <span className="material-symbols-rounded text-[20px]">send</span>
                     </>
                   )}
                 </button>
@@ -421,7 +420,7 @@ export default function ReviewPage() {
           {/* Literary Footnote */}
           <footer className="mt-space-lg text-center flex flex-col items-center justify-center gap-1">
             <div className="flex items-center gap-1 text-on-surface-variant/50">
-              <span className="material-symbols-outlined text-[16px]">local_cafe</span>
+              <span className="material-symbols-rounded text-[16px]">local_cafe</span>
               <span className="font-label-sm text-label-sm">
                 طابت أوقاتكم برفقة الكتب والمشروبات الدافئة
               </span>

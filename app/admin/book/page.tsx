@@ -103,7 +103,7 @@ export default function BookManager() {
     return (
       <main className="flex-1 flex flex-col justify-center items-center min-h-screen bg-surface px-margin">
         <div className="flex flex-col items-center gap-3">
-          <span className="material-symbols-outlined text-secondary text-[36px] animate-spin">
+          <span className="material-symbols-rounded text-secondary text-[36px] animate-spin">
             auto_stories
           </span>
           <p className="font-body-md text-on-surface-variant font-thmanyah">جارٍ التحميل...</p>
@@ -125,7 +125,7 @@ export default function BookManager() {
             onClick={() => router.push("/admin/dashboard")}
             type="button"
           >
-            <span className="material-symbols-outlined text-[24px]">arrow_forward</span>
+            <span className="material-symbols-rounded text-[24px]">arrow_forward</span>
           </button>
           <h1 className="font-title-md text-title-md text-primary leading-tight font-semibold font-thmanyah text-center">
             تغيير كتاب الشهر
@@ -152,19 +152,19 @@ export default function BookManager() {
                   {old.cover_url ? (
                     <img alt={`غلاف ${old.title}`} className="w-full h-full object-cover" src={old.cover_url} />
                   ) : (
-                    <span className="material-symbols-outlined text-secondary text-[24px]">book</span>
+                    <span className="material-symbols-rounded text-secondary text-[24px]">book</span>
                   )}
                 </div>
                 <div className="flex flex-col min-w-0 flex-1">
                   <div className="flex items-center gap-space-xs mb-1">
-                    <span className="material-symbols-outlined text-secondary text-[16px]">calendar_today</span>
+                    <span className="material-symbols-rounded text-secondary text-[16px]">calendar_today</span>
                     <span className="font-label-sm text-label-sm text-secondary">الكتاب الحالي</span>
                   </div>
                   <h2 className="font-title-md text-body-md text-primary truncate font-bold">{old.title}</h2>
                   <p className="font-body-sm text-body-sm text-on-surface-variant truncate font-medium">{old.author}</p>
                 </div>
                 <div className="shrink-0 pl-1">
-                  <span className="material-symbols-outlined text-secondary text-[22px]">verified</span>
+                  <span className="material-symbols-rounded text-secondary text-[22px]">verified</span>
                 </div>
               </div>
             </div>
@@ -174,7 +174,7 @@ export default function BookManager() {
           <form className="flex flex-col gap-space-md" onSubmit={requestSave}>
             <div className="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm border border-surface-container-high flex flex-col gap-space-md">
               <div className="flex items-center gap-space-sm mb-1 pb-space-xs border-b border-surface-container">
-                <span className="material-symbols-outlined text-primary text-[20px]">auto_stories</span>
+                <span className="material-symbols-rounded text-primary text-[20px]">auto_stories</span>
                 <h3 className="font-title-md text-title-md text-primary font-bold">
                   بيانات الاختيار الجديد
                 </h3>
@@ -198,7 +198,7 @@ export default function BookManager() {
                     type="text"
                     value={title}
                   />
-                  <span className="material-symbols-outlined text-outline absolute left-3 pointer-events-none text-[20px]">
+                  <span className="material-symbols-rounded text-outline absolute left-3 pointer-events-none text-[20px]">
                     book
                   </span>
                 </div>
@@ -222,7 +222,7 @@ export default function BookManager() {
                     type="text"
                     value={author}
                   />
-                  <span className="material-symbols-outlined text-outline absolute left-3 pointer-events-none text-[20px]">
+                  <span className="material-symbols-rounded text-outline absolute left-3 pointer-events-none text-[20px]">
                     person_outline
                   </span>
                 </div>
@@ -258,7 +258,7 @@ export default function BookManager() {
                           onChange={handleCoverChange}
                           type="file"
                         />
-                        <span className="material-symbols-outlined text-[16px]">cached</span>
+                        <span className="material-symbols-rounded text-[16px]">cached</span>
                         <span>تغيير</span>
                       </label>
                     </div>
@@ -271,7 +271,7 @@ export default function BookManager() {
                         type="file"
                       />
                       <div className="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-secondary">
-                        <span className="material-symbols-outlined text-[22px]">cloud_upload</span>
+                        <span className="material-symbols-rounded text-[22px]">cloud_upload</span>
                       </div>
                       <span className="font-label-md text-label-md text-primary font-medium">
                         اختر صورة الغلاف
@@ -289,7 +289,7 @@ export default function BookManager() {
             <div className="mt-2">
               <div className="flex items-center justify-between mb-space-xs px-1">
                 <div className="flex items-center gap-space-xs">
-                  <span className="material-symbols-outlined text-secondary text-[18px]">visibility</span>
+                  <span className="material-symbols-rounded text-secondary text-[18px]">visibility</span>
                   <h3 className="font-title-md text-label-lg text-primary font-semibold">
                     معاينة حية للبطاقة في الصفحة الرئيسية
                   </h3>
@@ -305,7 +305,7 @@ export default function BookManager() {
                     {effectiveCover ? (
                       <img alt="معاينة الغلاف" className="w-20 h-28 object-cover rounded-lg" src={effectiveCover} />
                     ) : (
-                      <span className="material-symbols-outlined text-secondary text-[32px]">book</span>
+                      <span className="material-symbols-rounded text-secondary text-[32px]">book</span>
                     )}
                   </div>
                   <div className="flex flex-col flex-1 min-w-0">
@@ -333,14 +333,13 @@ export default function BookManager() {
 
             {/* In-app warning banner (replaces browser confirm popup) */}
             <div
-              className={`fixed bottom-4 left-0 right-0 z-40 max-w-xl mx-auto px-4 transition-all duration-300 ease-in-out ${
-                showWarning ? "translate-y-0 opacity-100 pointer-events-auto" : "translate-y-8 opacity-0 pointer-events-none"
-              }`}
+              className={`fixed bottom-4 left-0 right-0 z-40 max-w-xl mx-auto px-4 transition-all duration-300 ease-in-out ${showWarning ? "translate-y-0 opacity-100 pointer-events-auto" : "translate-y-8 opacity-0 pointer-events-none"
+                }`}
             >
               <div className="bg-inverse-surface rounded-2xl shadow-2xl p-space-md flex flex-col gap-space-sm border border-outline-variant/20">
                 <div className="flex items-start gap-space-sm">
                   <div className="w-9 h-9 rounded-full bg-tertiary-fixed/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <span className="material-symbols-outlined text-tertiary-fixed-dim text-[20px]">
+                    <span className="material-symbols-rounded text-tertiary-fixed-dim text-[20px]">
                       warning
                     </span>
                   </div>
@@ -362,12 +361,12 @@ export default function BookManager() {
                   >
                     {saving ? (
                       <>
-                        <span className="material-symbols-outlined animate-spin text-[18px]">autorenew</span>
+                        <span className="material-symbols-rounded animate-spin text-[18px]">autorenew</span>
                         <span>جارٍ الحفظ...</span>
                       </>
                     ) : (
                       <>
-                        <span className="material-symbols-outlined text-[18px]">check</span>
+                        <span className="material-symbols-rounded text-[18px]">check</span>
                         <span>تأكيد الاعتماد</span>
                       </>
                     )}
@@ -385,9 +384,8 @@ export default function BookManager() {
 
             {/* Default Sticky Bottom Actions Bar (hidden when warning is visible) */}
             <div
-              className={`fixed bottom-4 left-0 right-0 z-30 max-w-xl mx-auto px-4 transition-all duration-300 ease-in-out ${
-                showWarning ? "translate-y-8 opacity-0 pointer-events-none" : "translate-y-0 opacity-100 pointer-events-auto"
-              }`}
+              className={`fixed bottom-4 left-0 right-0 z-30 max-w-xl mx-auto px-4 transition-all duration-300 ease-in-out ${showWarning ? "translate-y-8 opacity-0 pointer-events-none" : "translate-y-0 opacity-100 pointer-events-auto"
+                }`}
             >
               <div className="bg-surface-container-lowest/95 backdrop-blur-md rounded-2xl shadow-xl p-space-sm flex items-center gap-space-sm border border-outline-variant/30">
                 <button
@@ -396,7 +394,7 @@ export default function BookManager() {
                   type="submit"
                 >
                   <>
-                    <span className="material-symbols-outlined text-[20px]">check</span>
+                    <span className="material-symbols-rounded text-[20px]">check</span>
                     <span>اعتماد هذا الكتاب</span>
                   </>
                 </button>

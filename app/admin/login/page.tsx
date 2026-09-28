@@ -33,7 +33,7 @@ export default function Login() {
         {/* Brand Header */}
         <div className="flex flex-col items-center text-center mb-8">
           <div className="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center p-2 mb-3.5 shadow-sm relative group">
-            <span className="material-symbols-outlined text-primary text-[32px]">menu_book</span>
+            <span className="material-symbols-rounded text-primary text-[32px]">menu_book</span>
             <div className="absolute -inset-1 rounded-full bg-secondary-fixed/30 -z-10 blur-sm"></div>
           </div>
           <span
@@ -55,7 +55,7 @@ export default function Login() {
         <div className="bg-surface-container-lowest rounded-2xl p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(65,40,23,0.06)] relative overflow-hidden border border-surface-container-high">
           <div className="text-center mb-6">
             <div className="inline-flex items-center justify-center gap-1.5 px-3 py-1 rounded-full bg-surface-container mb-3 text-secondary">
-              <span className="material-symbols-outlined text-[16px]">admin_panel_settings</span>
+              <span className="material-symbols-rounded text-[16px]">admin_panel_settings</span>
               <span className="font-label-sm text-label-sm font-semibold">بوابة الإدارة</span>
             </div>
             <h1 className="font-headline-md text-headline-md text-primary font-semibold mb-1">
@@ -84,7 +84,7 @@ export default function Login() {
                   type="email"
                   value={email}
                 />
-                <span className="material-symbols-outlined absolute left-3.5 text-outline text-[20px] pointer-events-none">
+                <span className="material-symbols-rounded absolute left-3.5 text-outline text-[20px] pointer-events-none">
                   mail
                 </span>
               </div>
@@ -97,9 +97,8 @@ export default function Login() {
               </label>
               <div className="relative flex items-center">
                 <input
-                  className={`w-full h-12 px-4 pl-11 text-right bg-surface-container-low text-on-surface font-body-md text-body-md rounded-xl transition-all duration-200 outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_#5a3e2b] ${
-                    !showPassword ? "tracking-widest" : ""
-                  }`}
+                  className={`w-full h-12 px-4 pl-11 text-right bg-surface-container-low text-on-surface font-body-md text-body-md rounded-xl transition-all duration-200 outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_#5a3e2b] ${!showPassword ? "tracking-widest" : ""
+                    }`}
                   dir="ltr"
                   id="password"
                   name="password"
@@ -115,7 +114,7 @@ export default function Login() {
                   onClick={() => setShowPassword(!showPassword)}
                   type="button"
                 >
-                  <span className="material-symbols-outlined text-[20px]">
+                  <span className="material-symbols-rounded text-[20px]">
                     {showPassword ? "visibility_off" : "visibility"}
                   </span>
                 </button>
@@ -136,13 +135,13 @@ export default function Login() {
             >
               {loading ? (
                 <>
-                  <span className="material-symbols-outlined animate-spin text-[20px]">sync</span>
+                  <span className="material-symbols-rounded animate-spin text-[20px]">sync</span>
                   <span>جارٍ التحقق...</span>
                 </>
               ) : (
                 <>
                   <span>دخول</span>
-                  <span className="material-symbols-outlined text-[18px] transform rotate-180">
+                  <span className="material-symbols-rounded text-[18px] transform rotate-180">
                     arrow_forward
                   </span>
                 </>
@@ -154,7 +153,7 @@ export default function Login() {
         {/* Footer info */}
         <div className="flex flex-col items-center text-center mt-8 gap-2">
           <div className="flex items-center gap-1.5 text-outline">
-            <span className="material-symbols-outlined text-[16px]">menu_book</span>
+            <span className="material-symbols-rounded text-[16px]">menu_book</span>
             <span className="font-label-sm text-label-sm">منصة مجتمع القراءة المعرفي</span>
           </div>
           <p className="font-label-sm text-label-sm text-outline-variant">

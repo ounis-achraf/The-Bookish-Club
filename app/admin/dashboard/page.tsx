@@ -75,7 +75,7 @@ export default function Dashboard() {
     return (
       <main className="flex-1 flex flex-col justify-center items-center min-h-screen bg-surface px-margin">
         <div className="flex flex-col items-center gap-3">
-          <span className="material-symbols-outlined text-secondary text-[36px] animate-spin">
+          <span className="material-symbols-rounded text-secondary text-[36px] animate-spin">
             dashboard
           </span>
           <p className="font-body-md text-on-surface-variant font-thmanyah">جارٍ تحميل لوحة التحكم...</p>
@@ -128,7 +128,7 @@ export default function Dashboard() {
           <section className="flex items-center justify-between bg-surface-container-low px-space-md py-space-sm rounded-xl shadow-sm border border-surface-container-high">
             <div className="flex items-center gap-space-sm">
               <div className="relative w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center shrink-0">
-                <span className="material-symbols-outlined text-on-secondary-container text-[22px]">
+                <span className="material-symbols-rounded text-on-secondary-container text-[22px]">
                   admin_panel_settings
                 </span>
                 <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-tertiary-container rounded-full ring-2 ring-surface-container-low"></span>
@@ -154,7 +154,7 @@ export default function Dashboard() {
               title="تسجيل الخروج"
               type="button"
             >
-              <span className="material-symbols-outlined text-[20px] transform rotate-180">
+              <span className="material-symbols-rounded text-[20px] transform rotate-180">
                 logout
               </span>
             </button>
@@ -164,12 +164,12 @@ export default function Dashboard() {
           <section className="flex flex-col bg-surface-container-lowest rounded-xl p-space-md shadow-sm relative overflow-hidden border border-surface-container-high">
             <div className="flex items-center justify-between mb-space-sm">
               <div className="inline-flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-primary-fixed/60 text-primary">
-                <span className="material-symbols-outlined text-[15px] text-primary">spa</span>
+                <span className="material-symbols-rounded text-[15px] text-primary">spa</span>
                 <span className="font-label-md text-label-md font-semibold">كتاب الشهر الحالي</span>
               </div>
               <div className="flex items-center gap-1 bg-surface-container-high px-2 py-0.5 rounded-md">
                 <span
-                  className="material-symbols-outlined text-[14px] text-tertiary-fixed-dim"
+                  className="material-symbols-rounded text-[14px] text-tertiary-fixed-dim"
                   style={{ fontVariationSettings: "'FILL' 1" }}
                 >
                   star
@@ -190,7 +190,7 @@ export default function Dashboard() {
                     src={book.cover_url}
                   />
                 ) : (
-                  <span className="material-symbols-outlined text-secondary text-[48px]">
+                  <span className="material-symbols-rounded text-secondary text-[48px]">
                     menu_book
                   </span>
                 )}
@@ -214,7 +214,7 @@ export default function Dashboard() {
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-secondary-container/40 text-primary transition-all active:scale-95 w-fit mt-1 font-semibold text-label-md border border-outline-variant/30"
                   href="/admin/book"
                 >
-                  <span className="material-symbols-outlined text-[16px]">edit_note</span>
+                  <span className="material-symbols-rounded text-[16px]">edit_note</span>
                   <span>تغيير الكتاب</span>
                 </a>
               </div>
@@ -225,7 +225,7 @@ export default function Dashboard() {
           <section className="grid grid-cols-3 gap-space-sm">
             <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-lowest shadow-sm text-center border border-surface-container-high">
               <div className="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center mb-1">
-                <span className="material-symbols-outlined text-on-primary-fixed-variant text-[18px]">
+                <span className="material-symbols-rounded text-on-primary-fixed-variant text-[18px]">
                   menu_book
                 </span>
               </div>
@@ -240,7 +240,7 @@ export default function Dashboard() {
             <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-lowest shadow-sm text-center border border-surface-container-high">
               <div className="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center mb-1">
                 <span
-                  className="material-symbols-outlined text-on-tertiary-fixed-variant text-[18px]"
+                  className="material-symbols-rounded text-on-tertiary-fixed-variant text-[18px]"
                   style={{ fontVariationSettings: "'FILL' 1" }}
                 >
                   hotel_class
@@ -256,7 +256,7 @@ export default function Dashboard() {
 
             <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-lowest shadow-sm text-center border border-surface-container-high">
               <div className="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center mb-1">
-                <span className="material-symbols-outlined text-on-secondary-fixed-variant text-[18px]">
+                <span className="material-symbols-rounded text-on-secondary-fixed-variant text-[18px]">
                   photo_camera
                 </span>
               </div>
@@ -285,7 +285,7 @@ export default function Dashboard() {
                 href="/admin/archive"
               >
                 <span>الأرشيف</span>
-                <span className="material-symbols-outlined text-[16px]">arrow_back</span>
+                <span className="material-symbols-rounded text-[16px]">arrow_back</span>
               </a>
             </div>
 
@@ -293,8 +293,8 @@ export default function Dashboard() {
             <div className="flex items-center gap-space-sm overflow-x-auto pb-1">
               <button
                 className={`px-3 py-1.5 rounded-full font-label-md text-label-md shrink-0 shadow-sm transition-all active:scale-95 cursor-pointer ${filter === "all"
-                    ? "bg-primary text-on-primary font-medium"
-                    : "bg-surface-container-lowest text-on-surface-variant font-medium hover:bg-surface-container border border-outline-variant/30"
+                  ? "bg-primary text-on-primary font-medium"
+                  : "bg-surface-container-lowest text-on-surface-variant font-medium hover:bg-surface-container border border-outline-variant/30"
                   }`}
                 onClick={() => setFilter("all")}
                 type="button"
@@ -303,8 +303,8 @@ export default function Dashboard() {
               </button>
               <button
                 className={`px-3 py-1.5 rounded-full font-label-md text-label-md shrink-0 shadow-sm transition-all active:scale-95 cursor-pointer ${filter === "high"
-                    ? "bg-primary text-on-primary font-medium"
-                    : "bg-surface-container-lowest text-on-surface-variant font-medium hover:bg-surface-container border border-outline-variant/30"
+                  ? "bg-primary text-on-primary font-medium"
+                  : "bg-surface-container-lowest text-on-surface-variant font-medium hover:bg-surface-container border border-outline-variant/30"
                   }`}
                 onClick={() => setFilter("high")}
                 type="button"
@@ -313,8 +313,8 @@ export default function Dashboard() {
               </button>
               <button
                 className={`px-3 py-1.5 rounded-full font-label-md text-label-md shrink-0 shadow-sm transition-all active:scale-95 cursor-pointer ${filter === "photos"
-                    ? "bg-primary text-on-primary font-medium"
-                    : "bg-surface-container-lowest text-on-surface-variant font-medium hover:bg-surface-container border border-outline-variant/30"
+                  ? "bg-primary text-on-primary font-medium"
+                  : "bg-surface-container-lowest text-on-surface-variant font-medium hover:bg-surface-container border border-outline-variant/30"
                   }`}
                 onClick={() => setFilter("photos")}
                 type="button"
@@ -359,7 +359,7 @@ export default function Dashboard() {
                       <div className="inline-flex items-center gap-[1px] px-1.5 py-0.5 rounded-full bg-surface-container-high/70 text-tertiary-fixed-dim shrink-0">
                         {[1, 2, 3, 4, 5].map((n) => (
                           <span
-                            className="material-symbols-outlined text-[9px]"
+                            className="material-symbols-rounded text-[9px]"
                             key={n}
                             style={{ fontVariationSettings: `'FILL' ${n <= r.rating ? 1 : 0}` }}
                           >
@@ -374,7 +374,7 @@ export default function Dashboard() {
                         title="حذف"
                         type="button"
                       >
-                        <span className="material-symbols-outlined text-[16px]">delete</span>
+                        <span className="material-symbols-rounded text-[16px]">delete</span>
                       </button>
                     </div>
                   </div>
@@ -412,21 +412,21 @@ export default function Dashboard() {
             className="flex flex-col items-center justify-center gap-1 w-16 h-12 text-primary font-semibold"
             href="/admin/dashboard"
           >
-            <span className="material-symbols-outlined text-[22px]">dashboard</span>
+            <span className="material-symbols-rounded text-[22px]">dashboard</span>
             <span className="font-label-sm text-label-sm">الرئيسية</span>
           </a>
           <a
             className="flex flex-col items-center justify-center gap-1 w-16 h-12 text-on-surface-variant hover:text-primary transition-colors"
             href="/admin/book"
           >
-            <span className="material-symbols-outlined text-[22px]">auto_stories</span>
+            <span className="material-symbols-rounded text-[22px]">auto_stories</span>
             <span className="font-label-sm text-label-sm">كتاب الشهر</span>
           </a>
           <a
             className="flex flex-col items-center justify-center gap-1 w-16 h-12 text-on-surface-variant hover:text-primary transition-colors"
             href="/admin/archive"
           >
-            <span className="material-symbols-outlined text-[22px]">collections_bookmark</span>
+            <span className="material-symbols-rounded text-[22px]">collections_bookmark</span>
             <span className="font-label-sm text-label-sm">الأرشيف</span>
           </a>
         </div>
