@@ -345,7 +345,7 @@ export default function Dashboard() {
                         {r.member_name.charAt(0).toUpperCase()}
                       </div>
                       <div className="flex flex-col">
-                        <span className="font-title-md text-title-md text-primary leading-tight font-semibold">
+                        <span dir="auto" className="font-title-md text-title-md text-primary leading-tight font-semibold text-start">
                           {r.member_name}
                         </span>
                         <span className="font-label-sm text-label-sm text-outline">
@@ -382,22 +382,20 @@ export default function Dashboard() {
                     </div>
                   </div>
 
-                  <div className="flex gap-space-sm items-start">
-                    <div className="flex-1 min-w-0">
-                      <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed whitespace-pre-wrap">
-                        {r.review_text}
-                      </p>
-                    </div>
+                  <div className="flex flex-col gap-space-xs">
+                    <p dir="auto" className="font-body-md text-body-md text-on-surface-variant leading-relaxed whitespace-pre-wrap text-start">
+                      {r.review_text}
+                    </p>
                     {r.photo_url && (
                       <a
-                        className="w-20 h-20 rounded-lg overflow-hidden shadow-sm shrink-0 bg-surface-container relative group"
+                        className="mt-2 rounded-xl overflow-hidden shadow-sm bg-surface-container relative group max-w-sm block cursor-pointer"
                         href={r.photo_url}
                         rel="noreferrer"
                         target="_blank"
                       >
                         <img
                           alt="صورة المراجعة"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                          className="w-full max-h-72 object-cover group-hover:scale-105 transition-transform"
                           src={r.photo_url}
                         />
                       </a>

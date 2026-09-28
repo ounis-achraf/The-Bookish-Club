@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "The Bookish Club | نادي الكتّاب",
-  description: "نادي الكتّاب • منصة مجتمع القراءة المعرفي وجلسات القراءة الحوارية"
+  title: "The Bookish Club | نادي المطالعة",
+  description: "نادي المطالعة • منصة مجتمع القراءة المعرفي وجلسات القراءة الحوارية"
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

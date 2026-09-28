@@ -328,7 +328,7 @@ export default function Archive() {
                           {i + 1}
                         </span>
                       </div>
-                      <span className="font-title-md text-title-md text-primary font-semibold truncate">
+                      <span dir="auto" className="font-title-md text-title-md text-primary font-semibold truncate text-start">
                         {r.member_name}
                       </span>
                     </div>
@@ -336,7 +336,7 @@ export default function Archive() {
                   </div>
 
                   {/* Review text */}
-                  <p className="font-body-md text-body-md text-on-surface leading-relaxed">
+                  <p dir="auto" className="font-body-md text-body-md text-on-surface leading-relaxed whitespace-pre-wrap text-start">
                     {r.review_text}
                   </p>
 
